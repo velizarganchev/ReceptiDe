@@ -6,7 +6,7 @@ const SearchBox = () => {
     <Form className="d-flex">
         <FormControl
           type="search"
-          placeholder="Search"
+          placeholder="Search Recipe"
           className="me-2"
           aria-label="Search"
         />
