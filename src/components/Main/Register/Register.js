@@ -48,7 +48,7 @@ const Register = () => {
             Please provide a valid password.
           </Form.Control.Feedback>
         </Form.Group>
-        <Form.Group as={Col} md="3" controlId="validationCustom04">
+        <Form.Group as={Col} md="3" controlId="validationCustom05">
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" placeholder="State" required />
           <Form.Control.Feedback type="invalid">

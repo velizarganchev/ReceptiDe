@@ -3,9 +3,9 @@ import { Form } from "react-bootstrap";
 const CreateRecipe = () => {
   return (
     <>
-      <div class="row">
-        <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-2 col-xl-8">
-          <h2 class="heading-margin text-center text-dark">Create Recipe</h2>
+      <div className="row">
+        <div className="col-sm-12 offset-lg-2 col-lg-8 offset-xl-2 col-xl-8">
+          <h2 className="heading-margin text-center text-dark">Create Recipe</h2>
 
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">

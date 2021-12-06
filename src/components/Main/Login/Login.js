@@ -6,29 +6,43 @@ import {
   FormControl,
   Button,
 } from "react-bootstrap";
+import { useNavigate } from "react-router";
+import * as authService from "../../../services/authService";
 
-const Login = () => {
+const Login = ({loginHandler}) => {
+
+  const navigate = useNavigate();
+
+  const onLogin = (e) => {
+    e.preventDefault();
+
+    let formData = new FormData(e.currentTarget);
+
+    let username = formData.get("username");
+
+    authService.Login(username);
+    loginHandler(username);
+    navigate("/");
+  };
+
   return (
-    <Form>
+    <Form onSubmit={onLogin}>
       <Row className="align-items-center">
         <Col xs="auto">
-          <Form.Label htmlFor="inlineFormInput" visuallyHidden>
-            Name
-          </Form.Label>
-          <Form.Control
-            className="mb-2"
-            id="inlineFormInput"
-            placeholder="Jane Doe"
-          />
-        </Col>
-        <Col xs="auto">
-          <Form.Label htmlFor="inlineFormInputGroup" visuallyHidden>
-            Username
-          </Form.Label>
+          <Form.Label htmlFor="username">Username</Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text>@</InputGroup.Text>
-            <FormControl id="inlineFormInputGroup" placeholder="Username" />
+            <FormControl id="username" placeholder="Username" name="username" />
           </InputGroup>
+        </Col>
+        <Col xs="auto">
+          <Form.Label htmlFor="password">Password</Form.Label>
+          <Form.Control
+            className="mb-2"
+            id="password"
+            placeholder="1234"
+            name="password"
+          />
         </Col>
         <Col xs="auto">
           <Form.Check
