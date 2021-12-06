@@ -61,10 +61,8 @@ const Header = ({ isAuthenticated, user }) => {
                   </Nav.Link>
                 </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link>
-                <Nav.Link as={Link} to={"/all-recipes"}>
-                  All Recipes
-                </Nav.Link>
+              <Nav.Link as={Link} to={"/all-recipes"}>
+                All Recipes
               </Nav.Link>
               <Nav.Link as={Link} to={"/all-produkts"}>
                 All Produkts
