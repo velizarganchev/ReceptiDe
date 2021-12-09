@@ -5,9 +5,13 @@ import * as recipeService from "../../../services/recipeService";
 
 const NewRecipes = () => {
   const [recipe, setRecipe] = useState([]);
+  
   useEffect(() => {
     recipeService.GetNewRecipes().then((res) => {
       setRecipe(res);
+    })
+    .catch(err => { 
+      console.log(err)
     });
   }, []);
 

@@ -16,6 +16,7 @@ import MainDishes from "./components/AllRecipes/MainDishes/MainDishes";
 import Soups from "./components/AllRecipes/Soups/Soups";
 import Salads from "./components/AllRecipes/Salads/Salads";
 import Desserts from "./components/AllRecipes/Desserts/Desserts.js";
+import Details from "./components/Main/NewRecipes/Details";
 
 function App() {
   const [userInfo, setUserInfo] = useState({
@@ -53,6 +54,7 @@ const loginHandler = (username) =>{
           <Route path="/all-recipes" element={<AllRecipes />} />
           <Route path="/all-produkts" element={<AllProdukts />} />
           <Route path="/create-recipe" element={<CreateRecipe />} />
+          <Route path="/details/:petId" element={<Details/>} />
         </Routes>
       </main>
       <Footer />

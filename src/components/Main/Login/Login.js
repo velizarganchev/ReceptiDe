@@ -39,6 +39,7 @@ const Login = ({loginHandler}) => {
           <Form.Label htmlFor="password">Password</Form.Label>
           <Form.Control
             className="mb-2"
+            type="password"
             id="password"
             placeholder="1234"
             name="password"
