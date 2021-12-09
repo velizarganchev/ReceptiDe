@@ -1,12 +1,29 @@
-
-import {Card, Button} from "react-bootstrap"
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { Card, Button } from "react-bootstrap";
+import * as recipeService from "../../../services/recipeService";
 
 const Details = () => {
+  const [recipe, setRecipe] = useState([]);
+  const { recipeId } = useParams();
+
+  useEffect(() => {
+    recipeService
+      .GetRecipe(recipeId)
+      .then((res) => {
+        console.log(res)
+        setRecipe(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
-    <Card className="text-center">
-      <Card.Header>Featured</Card.Header>
+    <Card className="text-center details">
+      <Card.Header>{recipe.title}</Card.Header>
       <Card.Body>
-        <Card.Title>Special title treatment</Card.Title>
+        <Card.Title>{recipe.title}</Card.Title>
         <Card.Text>
           With supporting text below as a natural lead-in to additional content.
         </Card.Text>

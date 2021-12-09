@@ -1,9 +1,19 @@
-import { Form, Button } from "react-bootstrap";
+import { useState, useEffect } from "react";
+
+import { Form, Button, FormGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import * as recipeService from "../../services/recipeService";
 
 const CreateRecipe = () => {
   const navigate = useNavigate();
+
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    recipeService.GetCategories().then((res) => {
+      setCategories(Object.values(res));
+    });
+  }, []);
 
   const onRecipeCreate = (e) => {
     e.preventDefault();
@@ -13,16 +23,19 @@ const CreateRecipe = () => {
     let title = formData.get("title");
     let ingredients = formData.get("ingredients");
     let method = formData.get("method");
+    let category = formData.get("category");
     let cookTime = formData.get("cookTime");
     let serves = formData.get("serves");
     let pictureUrl = formData.get("pictureUrl");
     let videoUrl = formData.get("videoUrl");
+
 
     recipeService
       .Create({
         title,
         ingredients,
         method,
+        category,
         cookTime,
         serves,
         pictureUrl,
@@ -43,7 +56,11 @@ const CreateRecipe = () => {
           <Form onSubmit={onRecipeCreate} method="POST">
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Title</Form.Label>
-              <Form.Control type="text" placeholder="Pork belly recipes" name="title"/>
+              <Form.Control
+                type="text"
+                placeholder="Pork belly recipes"
+                name="title"
+              />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -67,25 +84,50 @@ const CreateRecipe = () => {
                 placeholder="Heat oven to 180C/fan 160C/gas 4. Lay the pork, skin-side up, on a rack in a roasting tin. Trickle with a little oil,....... "
               />
             </Form.Group>
+
+            <FormGroup className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Categories</Form.Label>
+              <Form.Select name="category">
+                {categories.map((x) => (
+                  <option key={x._id} value={x.name}>
+                    {x.name}
+                  </option>
+                ))}
+              </Form.Select>
+            </FormGroup>
+
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Cook Time</Form.Label>
-              <Form.Control type="text" placeholder="3 hrs and 30 mins" name="cookTime" />
+              <Form.Control
+                type="text"
+                placeholder="3 hrs and 30 mins"
+                name="cookTime"
+              />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Serves</Form.Label>
-              <Form.Control type="text" placeholder="6" name="serves"/>
+              <Form.Control type="text" placeholder="6" name="serves" />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Picture Url</Form.Label>
-              <Form.Control type="url" placeholder="https://www.recepis.de" name="pictureUrl"/>
+              <Form.Control
+                type="url"
+                placeholder="https://www.recepis.de"
+                name="pictureUrl"
+              />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Video Url</Form.Label>
-              <Form.Control type="url" placeholder="https://www.recepis.de" name="videoUrl"/>
+              <Form.Control
+                type="url"
+                placeholder="https://www.recepis.de"
+                name="videoUrl"
+              />
             </Form.Group>
+
             <Button variant="primary" type="submit">
               Submit
             </Button>

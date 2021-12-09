@@ -28,7 +28,7 @@ function App() {
     let user = authService.getUser();    
 
     setUserInfo({
-      userInfo: user,
+      user,
       isAuthenticated: Boolean(user),
     });
   }, []);
@@ -54,7 +54,7 @@ const loginHandler = (username) =>{
           <Route path="/all-recipes" element={<AllRecipes />} />
           <Route path="/all-produkts" element={<AllProdukts />} />
           <Route path="/create-recipe" element={<CreateRecipe />} />
-          <Route path="/details/:petId" element={<Details/>} />
+          <Route path="/recipeDetails/:recipeId" element={<Details/>} />
         </Routes>
       </main>
       <Footer />
