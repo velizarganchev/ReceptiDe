@@ -17,13 +17,11 @@ const NewRecipes = () => {
   }, []);
 
   return (
-    <section>
-      <h2>New Recipes</h2>
-      <div className="newRecipes">
+    <section className="container">
+      <h2 className="sectionTitle">New Recipes</h2>
         {recipe.map((x) => (
           <RecipeItem key={x._id} recipe={x} />
         ))}
-      </div>
     </section>
   );
 };

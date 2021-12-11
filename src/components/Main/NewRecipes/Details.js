@@ -11,13 +11,12 @@ const Details = () => {
     recipeService
       .GetRecipe(recipeId)
       .then((res) => {
-        console.log(res)
         setRecipe(res);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [recipeId]);
 
   return (
     <Card className="text-center details">
@@ -25,11 +24,11 @@ const Details = () => {
       <Card.Body>
         <Card.Title>{recipe.title}</Card.Title>
         <Card.Text>
-          With supporting text below as a natural lead-in to additional content.
+          {recipe.ingredients}
         </Card.Text>
         <Button variant="primary">Go somewhere</Button>
       </Card.Body>
-      <Card.Footer className="text-muted">2 days ago</Card.Footer>
+      <Card.Footer className="text-muted">{recipe.cookTime}</Card.Footer>
     </Card>
   );
 };

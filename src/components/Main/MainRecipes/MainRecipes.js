@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react";
 import * as recipeService from "../../../services/recipeService";
-import RecipeItem from "../NewRecipes/RecipeItem"
+import RecipeItem from "../NewRecipes/RecipeItem";
 
-
-const MainDishes = () => {
-
+const MainRecipes = () => {
   const [recipe, setRecipe] = useState([]);
 
   useEffect(() => {
     recipeService
       .GetRecipes()
       .then((res) => {
-        let mainDishes = res.filter(x => x.category === "Main Dishes");
+        let mainDishes = res.filter((x) => x.category === "Main Dishes");
         setRecipe(mainDishes);
       })
       .catch((err) => {
@@ -20,13 +18,12 @@ const MainDishes = () => {
   }, []);
 
   return (
-    <section>
-      <div className="newRecipes">
-        {recipe.map((x) => (
-          <RecipeItem key={x._id} recipe={x} />
-        ))}
-      </div>
+    <section className="container">
+      <h2 className="sectionTitle">Main Dishes</h2>
+      {recipe.map((x) => (
+        <RecipeItem key={x._id} recipe={x} />
+      ))}
     </section>
   );
 };
-export default MainDishes;
+export default MainRecipes;

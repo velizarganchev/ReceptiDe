@@ -18,7 +18,7 @@ export const GetRecipes = async () => {
 
   let recipes = await response.json();
   let res = Object.values(recipes);
-
+console.log(res)
   return res;
 };
 

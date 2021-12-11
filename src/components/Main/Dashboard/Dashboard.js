@@ -1,7 +1,9 @@
 import SearchBox from "../../Header/SearchBox";
 import Categories from "../Categories/Categories";
+import MainRecipes from "../MainRecipes/MainRecipes";
 import NewRecipes from "../NewRecipes/Recipes";
-import WithMeat from "../MainDishes/MainDish";
+
+
 
 const Dashboard = () => {
   return (
@@ -9,7 +11,7 @@ const Dashboard = () => {
       <SearchBox />
       <Categories />
       <NewRecipes/>
-      <WithMeat />
+      <MainRecipes/>
     </>
   );
 };
