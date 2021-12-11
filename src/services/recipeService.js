@@ -1,6 +1,5 @@
 const baseUrl = "http://softuni-custom-server.herokuapp.com/jsonstore";
 
-
 export const Create = async (recipeData) => {
   const response = await fetch(`${baseUrl}/recipes`, {
     method: "POST",
@@ -9,7 +8,7 @@ export const Create = async (recipeData) => {
     },
     body: JSON.stringify(recipeData),
   });
-  
+
   let res = await response.json();
   return res;
 };
@@ -18,10 +17,8 @@ export const GetRecipes = async () => {
 
   let recipes = await response.json();
   let res = Object.values(recipes);
-console.log(res)
   return res;
 };
-
 
 export const GetRecipe = (recipeId) => {
   return fetch(`${baseUrl}/recipes/${recipeId}`).then((res) => res.json());
@@ -30,4 +27,3 @@ export const GetRecipe = (recipeId) => {
 export const GetCategories = () => {
   return fetch(`${baseUrl}/recipeCategories`).then((res) => res.json());
 };
-

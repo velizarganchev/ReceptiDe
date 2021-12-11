@@ -3,10 +3,9 @@ import { useState, useEffect } from "react";
 import { Form, Button, FormGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import * as recipeService from "../../services/recipeService";
-
+import * as authService from "../../services/authService";
 const CreateRecipe = () => {
   const navigate = useNavigate();
-
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -18,17 +17,17 @@ const CreateRecipe = () => {
   const onRecipeCreate = (e) => {
     e.preventDefault();
 
-    let formData = new FormData(e.currentTarget);
+    const formData = new FormData(e.currentTarget);
 
-    let title = formData.get("title");
-    let ingredients = formData.get("ingredients");
-    let method = formData.get("method");
-    let category = formData.get("category");
-    let cookTime = formData.get("cookTime");
-    let serves = formData.get("serves");
-    let pictureUrl = formData.get("pictureUrl");
-    let videoUrl = formData.get("videoUrl");
-
+    const title = formData.get("title");
+    const ingredients = formData.get("ingredients");
+    const method = formData.get("method");
+    const category = formData.get("category");
+    const cookTime = formData.get("cookTime");
+    const serves = formData.get("serves");
+    const pictureUrl = formData.get("pictureUrl");
+    const videoUrl = formData.get("videoUrl");
+    const user = authService.getUser();
 
     recipeService
       .Create({
@@ -40,6 +39,7 @@ const CreateRecipe = () => {
         serves,
         pictureUrl,
         videoUrl,
+        user,
       })
       .then((res) => {
         navigate("/dashboard");

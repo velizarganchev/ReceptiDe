@@ -2,8 +2,8 @@
 import Category from "./Category";
 const Categories = () => {
   return (
-    <section>
-      <h2>Categories</h2>
+    <section className="container">
+      <h2 className="sectionTitle">Categories</h2>
         <Category/>
     </section>
   );

@@ -7,7 +7,7 @@ import {
   Button,
 } from "react-bootstrap";
 import { useNavigate } from "react-router";
-import * as authService from "../../../services/authService";
+import * as authService from "../../services/authService";
 
 const Login = ({loginHandler}) => {
 

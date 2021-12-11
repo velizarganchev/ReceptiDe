@@ -4,20 +4,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
-
-import AllRecipes from "./components/AllRecipes/AllRecipes";
 import CreateRecipe from "./components/Create/CreateRecipe";
 import Header from "./components/Header/Header";
-import Login from "./components/Main/Login/Login";
+import Login from "./components/Login/Login";
 import Register from "./components/Main/Register/Register";
 import Footer from "./components/Main/Footer/Footer";
 import Dashboard from "./components/Main/Dashboard/Dashboard";
-import AllProdukts from "./components/AllProdukts/AllProdukts";
-import MainDishes from "./components/AllRecipes/MainDishes/MainDishes";
-import Soups from "./components/AllRecipes/Soups/Soups";
-import Salads from "./components/AllRecipes/Salads/Salads";
-import Desserts from "./components/AllRecipes/Desserts/Desserts.js";
-import Details from "./components/Main/NewRecipes/Details";
+import MainDishes from "./components/Main/Categories/MainDishes/MainDishes";
+import Soups from "./components/Main/Categories/Soups/Soups";
+import Salads from "./components/Main/Categories/Salads/Salads";
+import Desserts from "./components/Main/Categories/Desserts/Desserts.js.js";
+import MyRecipes from "./components/MyRecipe/MyRecipes";
+import Details from "./components/Main/Recipes/Details";
 
 function App() {
   const [userInfo, setUserInfo] = useState({
@@ -26,7 +24,7 @@ function App() {
   });
 
   useEffect(() => {
-    let user = authService.getUser();    
+    let user = authService.getUser();
 
     setUserInfo({
       user,
@@ -34,11 +32,12 @@ function App() {
     });
   }, []);
 
-const loginHandler = (username) =>{
-  setUserInfo({
-    user: username,
-    isAuthenticated: true,
-  })}
+  const loginHandler = (username) => {
+    setUserInfo({
+      user: username,
+      isAuthenticated: true,
+    });
+  };
 
   return (
     <div className="App">
@@ -50,12 +49,14 @@ const loginHandler = (username) =>{
           <Route path="/soups" element={<Soups />} />
           <Route path="/salads" element={<Salads />} />
           <Route path="/desserts" element={<Desserts />} />
-          <Route path="/login" element={<Login loginHandler={loginHandler}/>} />
+          <Route path="/my-recipes" element={<MyRecipes {...userInfo} />} />
+          <Route
+            path="/login"
+            element={<Login loginHandler={loginHandler} />}
+          />
           <Route path="/register" element={<Register />} />
-          <Route path="/all-recipes" element={<AllRecipes />} />
-          <Route path="/all-produkts" element={<AllProdukts />} />
           <Route path="/create-recipe" element={<CreateRecipe />} />
-          <Route path="/recipeDetails/:recipeId" element={<Details/>} />
+          <Route path="/recipeDetails/:recipeId" element={<Details />} />
         </Routes>
       </main>
       <Footer />

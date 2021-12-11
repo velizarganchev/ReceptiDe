@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import RecipeItem from "./RecipeItem";
+import RecipeCard from "./RecipeCard";
 import * as recipeService from "../../../services/recipeService";
 
 const NewRecipes = () => {
@@ -20,7 +20,7 @@ const NewRecipes = () => {
     <section className="container">
       <h2 className="sectionTitle">New Recipes</h2>
         {recipe.map((x) => (
-          <RecipeItem key={x._id} recipe={x} />
+          <RecipeCard key={x._id} recipe={x} />
         ))}
     </section>
   );

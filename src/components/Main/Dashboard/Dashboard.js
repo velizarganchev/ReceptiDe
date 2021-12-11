@@ -1,7 +1,7 @@
 import SearchBox from "../../Header/SearchBox";
 import Categories from "../Categories/Categories";
-import MainRecipes from "../MainRecipes/MainRecipes";
-import NewRecipes from "../NewRecipes/Recipes";
+import MainDishes from "../Categories/MainDishes/MainDishes";
+import NewRecipes from "../Recipes/Recipes";
 
 
 
@@ -11,7 +11,7 @@ const Dashboard = () => {
       <SearchBox />
       <Categories />
       <NewRecipes/>
-      <MainRecipes/>
+      <MainDishes/>
     </>
   );
 };

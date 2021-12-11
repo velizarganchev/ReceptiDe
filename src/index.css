@@ -1,6 +1,7 @@
 body {
   margin: 0;
   font-family: "Open Sans", sans-serif;
+  background: #ffffff;
 }
 
 *,
@@ -41,12 +42,62 @@ h6 {
   align-items: center;
 }
 .recipeCardImg img {
-  max-width: 300px;
+  max-width: 280px;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
 }
 
 .recipeTitle {
   text-decoration: none;
+  color: black;
+}
+.sectionTitleCategory {
+  font-size: 33px;
+}
+.containerCategory {
+  padding: 0 20px;
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.containerCategory .sectionTitle {
+  flex-basis: 100%;
+  flex-wrap: wrap;
+}
+.recipeCardCategory {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  border-radius: 40px;
+  background: whitesmoke;
+  text-decoration: none;
+}
+.recipeCardCategory img {
+  max-width: 240px;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+}
+
+.recipeTitleCategoryTitle {
+  color: black;
+}
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+}
+.footer-social-media {
+  display: flex;
+  list-style: none;
+}
+.footer-social-media li{
+  margin: 10px;
+}
+.icon{
   color: black;
 }
