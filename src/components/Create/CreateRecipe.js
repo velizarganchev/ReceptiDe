@@ -1,10 +1,13 @@
+import { useContext } from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Form, Button, FormGroup } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import * as recipeService from "../../services/recipeService";
-import * as authService from "../../services/authService";
+import { AuthContext } from "../../contexts/authContext";
+
 const CreateRecipe = () => {
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
 
@@ -27,20 +30,21 @@ const CreateRecipe = () => {
     const serves = formData.get("serves");
     const pictureUrl = formData.get("pictureUrl");
     const videoUrl = formData.get("videoUrl");
-    const user = authService.getUser();
 
     recipeService
-      .Create({
-        title,
-        ingredients,
-        method,
-        category,
-        cookTime,
-        serves,
-        pictureUrl,
-        videoUrl,
-        user,
-      })
+      .Create(
+        {
+          title,
+          ingredients,
+          method,
+          category,
+          cookTime,
+          serves,
+          pictureUrl,
+          videoUrl,
+        },
+        user.accessToken
+      )
       .then((res) => {
         navigate("/dashboard");
       });

@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
-import * as authService from "./services/authService";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+
+import { AuthContext } from "./contexts/authContext";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import CreateRecipe from "./components/Create/CreateRecipe";
@@ -18,49 +20,41 @@ import MyRecipes from "./components/MyRecipe/MyRecipes";
 import Details from "./components/Main/Recipes/Details";
 
 function App() {
-  const [userInfo, setUserInfo] = useState({
-    username: "",
-    isAuthenticated: false,
+  const [user, setUser] = useState({
+    accessToken: "",
+    email: "",
+    _id: "",
   });
 
-  useEffect(() => {
-    let user = authService.getUser();
-
-    setUserInfo({
-      user,
-      isAuthenticated: Boolean(user),
-    });
-  }, []);
-
-  const loginHandler = (username) => {
-    setUserInfo({
-      user: username,
-      isAuthenticated: true,
-    });
+  const login = (authData) => {
+    setUser(authData);
   };
 
+  const logout = () => {
+    // TODO
+  }
+
   return (
-    <div className="App">
-      <Header {...userInfo} />
-      <main className="site-content">
-        <Routes>
-          <Route path="/*" element={<Dashboard />} />
-          <Route path="/main-dishes" element={<MainDishes />} />
-          <Route path="/soups" element={<Soups />} />
-          <Route path="/salads" element={<Salads />} />
-          <Route path="/desserts" element={<Desserts />} />
-          <Route path="/my-recipes" element={<MyRecipes {...userInfo} />} />
-          <Route
-            path="/login"
-            element={<Login loginHandler={loginHandler} />}
-          />
-          <Route path="/register" element={<Register />} />
-          <Route path="/create-recipe" element={<CreateRecipe />} />
-          <Route path="/recipeDetails/:recipeId" element={<Details />} />
-        </Routes>
-      </main>
-      <Footer />
-    </div>
+    <AuthContext.Provider value={{ user, login }}>
+      <div className="App">
+        <Header email={user.email} />
+        <main className="site-content">
+          <Routes>
+            <Route path="/*" element={<Dashboard />} />
+            <Route path="/main-dishes" element={<MainDishes />} />
+            <Route path="/soups" element={<Soups />} />
+            <Route path="/salads" element={<Salads />} />
+            <Route path="/desserts" element={<Desserts />} />
+            <Route path="/my-recipes" element={<MyRecipes />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/create-recipe" element={<CreateRecipe />} />
+            <Route path="/recipeDetails/:recipeId" element={<Details />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </AuthContext.Provider>
   );
 }
 export default App;

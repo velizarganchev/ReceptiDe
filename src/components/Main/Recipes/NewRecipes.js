@@ -16,13 +16,22 @@ const NewRecipes = () => {
       });
   }, []);
 
-  return (
-    <section className="container">
-      <h2 className="sectionTitle">New Recipes</h2>
+  if (recipe.length > 0) {
+    return (
+      <section className="container">
+        <h2 className="sectionTitle">New Recipes</h2>
         {recipe.map((x) => (
           <RecipeCard key={x._id} recipe={x} />
         ))}
-    </section>
-  );
+      </section>
+    );
+  } else {
+    return (
+      <section className="container">
+        <h2 className="sectionTitle">New Recipes</h2>
+        <h2>No Recipes in Databese</h2>
+      </section>
+    );
+  }
 };
 export default NewRecipes;

@@ -1,17 +1,14 @@
 import SearchBox from "../../Header/SearchBox";
 import Categories from "../Categories/Categories";
-import MainDishes from "../Categories/MainDishes/MainDishes";
-import NewRecipes from "../Recipes/Recipes";
-
-
+import NewRecipes from "../Recipes/NewRecipes";
 
 const Dashboard = () => {
+
   return (
     <>
       <SearchBox />
       <Categories />
-      <NewRecipes/>
-      <MainDishes/>
+      <NewRecipes />
     </>
   );
 };

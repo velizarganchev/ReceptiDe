@@ -9,21 +9,30 @@ const Soups = () => {
     recipeService
       .GetRecipes()
       .then((res) => {
-        let mainDishes = res.filter((x) => x.category === "Soups");
-        setRecipe(mainDishes);
+        let soups = res.filter((x) => x.category === "Soups");
+        setRecipe(soups);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  return (
-    <section className="container">
-      <h2 className="sectionTitle">Soups</h2>
-      {recipe.map((x) => (
-        <RecipeCard key={x._id} recipe={x} />
-      ))}
-    </section>
-  );
+  if (recipe.length > 0) {
+    return (
+      <section className="container">
+        <h2 className="sectionTitle">Soups</h2>
+        {recipe.map((x) => (
+          <RecipeCard key={x._id} recipe={x} />
+        ))}
+      </section>
+    );
+  } else {
+    return (
+      <section className="container">
+        <h2 className="sectionTitle">Soups</h2>
+        <h2>No Recipes in Databese</h2>
+      </section>
+    );
+  }
 };
 export default Soups;

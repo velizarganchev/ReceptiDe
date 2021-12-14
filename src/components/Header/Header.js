@@ -1,7 +1,7 @@
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const Header = ({ isAuthenticated, user }) => {
+const Header = ({ email }) => {
   let guestUser = (
     <>
       <Nav.Link as={Link} to={"/login"}>
@@ -15,7 +15,7 @@ const Header = ({ isAuthenticated, user }) => {
 
   let authenticatedUser = (
     <>
-      <span>Welcome {user}</span>
+      <span>Welcome {email}</span>
       <Nav.Link as={Link} to={"/create-recipe"}>
         Create Recipe
       </Nav.Link>
@@ -65,7 +65,7 @@ const Header = ({ isAuthenticated, user }) => {
                 My Recipes
               </Nav.Link>
             </Nav>
-            <Nav>{isAuthenticated ? authenticatedUser : guestUser}</Nav>
+            <Nav>{email ? authenticatedUser : guestUser}</Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>

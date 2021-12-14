@@ -9,21 +9,30 @@ const Salads = () => {
     recipeService
       .GetRecipes()
       .then((res) => {
-        let mainDishes = res.filter((x) => x.category === "Salads");
-        setRecipe(mainDishes);
+        let salads = res.filter((x) => x.category === "Salads");
+        setRecipe(salads);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  return (
-    <section className="container">
-      <h2 className="sectionTitle">Salads</h2>
-      {recipe.map((x) => (
-        <RecipeCard key={x._id} recipe={x} />
-      ))}
-    </section>
-  );
+  if (recipe.length > 0) {
+    return (
+      <section className="container">
+        <h2 className="sectionTitle">Salads</h2>
+        {recipe.map((x) => (
+          <RecipeCard key={x._id} recipe={x} />
+        ))}
+      </section>
+    );
+  } else {
+    return (
+      <section className="container">
+        <h2 className="sectionTitle">Salads</h2>
+        <h2>No Recipes in Databese</h2>
+      </section>
+    );
+  }
 };
 export default Salads;

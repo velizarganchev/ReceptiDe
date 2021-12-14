@@ -2,22 +2,20 @@ import { useEffect, useState } from "react";
 import * as recipeService from "../../services/recipeService";
 import RecipeCard from "../Main/Recipes/RecipeCard";
 
-const MyRecipes = ({
-  user
-}) => {
+const MyRecipes = () => {
   const [recipe, setRecipe] = useState([]);
   console.log()
   useEffect(() => {
     recipeService
       .GetRecipes()
       .then((res) => {
-        let mainDishes = res.filter((x) => x.user === {user});
+        let mainDishes = res.filter((x) => x.user);
         setRecipe(mainDishes);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [user]);
+  }, []);
 
   return (
     <section className="container">

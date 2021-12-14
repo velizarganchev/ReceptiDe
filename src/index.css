@@ -87,17 +87,51 @@ h6 {
 .footer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-content: center;
   align-items: center;
+  /* position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0; */
 }
 .footer-social-media {
   display: flex;
   list-style: none;
 }
-.footer-social-media li{
+.footer-social-media li {
   margin: 10px;
 }
-.icon{
+.icon {
   color: black;
+}
+.search {
+  margin: 15px;
+}
+
+.openRecipe {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-around;
+}
+.openRecipeBackground {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.openRecipeBackgroundFront {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.openRecipeBootomDetails {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.detaislCell{
+  display: flex;
+  justify-content: space-between;
 }

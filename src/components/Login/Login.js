@@ -6,11 +6,14 @@ import {
   FormControl,
   Button,
 } from "react-bootstrap";
+
+import { useContext } from "react";
 import { useNavigate } from "react-router";
+import { AuthContext } from "../../contexts/authContext";
 import * as authService from "../../services/authService";
 
-const Login = ({loginHandler}) => {
-
+const Login = () => {
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const onLogin = (e) => {
@@ -18,21 +21,32 @@ const Login = ({loginHandler}) => {
 
     let formData = new FormData(e.currentTarget);
 
-    let username = formData.get("username");
+    let email = formData.get("email");
+    let password = formData.get("password");
 
-    authService.Login(username);
-    loginHandler(username);
-    navigate("/");
+    authService
+      .Login(email, password)
+      .then((authdata) => {
+        login(authdata);
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
     <Form onSubmit={onLogin}>
       <Row className="align-items-center">
         <Col xs="auto">
-          <Form.Label htmlFor="username">Username</Form.Label>
+          <Form.Label htmlFor="email">Username</Form.Label>
           <InputGroup className="mb-2">
-            <InputGroup.Text>@</InputGroup.Text>
-            <FormControl id="username" placeholder="Username" name="username" />
+            <FormControl
+              id="email"
+              placeholder="Email"
+              name="email"
+              type="email"
+            />
           </InputGroup>
         </Col>
         <Col xs="auto">

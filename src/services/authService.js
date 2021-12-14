@@ -1,14 +1,34 @@
-export const Login = (username) => {
+const baseUrl = "http://localhost:3030";
 
-    localStorage.setItem('username',username)
-}
+export const Login = async (email, password) => {
+  let res = await fetch(`${baseUrl}/users/login`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({ email, password }),
+  });
+
+  let jsonResult = await res.json();
+
+  if (res.ok) {
+    return jsonResult;
+  } else {
+    throw jsonResult.message;
+  }
+};
+
+export const Logout = () => {
+ fetch(`${baseUrl}/users/logout`)
+};
+
 
 export const getUser = () => {
-    let username = localStorage.getItem('username')
+  let username = localStorage.getItem("username");
 
-    return username;
-}
+  return username;
+};
 
 export const isAuthenticated = () => {
-    return Boolean(getUser());
-}
+  return Boolean(getUser());
+};
