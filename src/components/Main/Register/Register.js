@@ -1,69 +1,71 @@
+import { useNavigate } from "react-router";
+import { useAuthContext } from "../../../contexts/AuthContext";
+import * as authService from "../../../services/authService";
+
 import { Form, Row, Col, Button, InputGroup } from "react-bootstrap";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const { login } = useAuthContext();
+
+  const onRegister = (e) => {
+    e.preventDefault();
+
+    let { email, password } = Object.fromEntries(new FormData(e.currentTarget));
+
+    authService.Register(email, password).then((authData) => {
+      login(authData);
+
+      navigate("/Home");
+    });
+  };
+
   return (
-    <Form>
+    <Form onSubmit={onRegister} method="POST">
       <Row className="mb-3">
-        <Form.Group as={Col} md="4" controlId="validationCustom01">
-          <Form.Label>First name</Form.Label>
+        <Form.Group
+          as={Col}
+          md="4"
+          controlId="validationCustom01"
+          onSubmit={onRegister}
+          method="POST"
+        >
+          <Form.Label>Email</Form.Label>
           <Form.Control
             required
-            type="text"
-            placeholder="First name"
-            defaultValue="Mark"
+            type="email"
+            placeholder="email"
+            name="email"
           />
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group as={Col} md="4" controlId="validationCustom02">
-          <Form.Label>Last name</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            placeholder="Last name"
-            defaultValue="Otto"
-          />
-          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group as={Col} md="4" controlId="validationCustomUsername">
-          <Form.Label>Username</Form.Label>
-          <InputGroup hasValidation>
-            <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
-            <Form.Control
-              type="text"
-              placeholder="Username"
-              aria-describedby="inputGroupPrepend"
-              required
-            />
-            <Form.Control.Feedback type="invalid">
-              Please choose a username.
-            </Form.Control.Feedback>
-          </InputGroup>
         </Form.Group>
       </Row>
       <Row className="mb-3">
         <Form.Group as={Col} md="3" controlId="validationCustom04">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" required />
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            required
+            name="password"
+          />
           <Form.Control.Feedback type="invalid">
             Please provide a valid password.
           </Form.Control.Feedback>
         </Form.Group>
-        <Form.Group as={Col} md="3" controlId="validationCustom05">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="State" required />
+        {/* <Form.Group as={Col} md="3" controlId="validationCustom05">
+          <Form.Label>Confirm Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Confirm Password"
+            required
+            name="confirmPassword"
+          />
           <Form.Control.Feedback type="invalid">
             Please provide a valid password.
           </Form.Control.Feedback>
-        </Form.Group>
+        </Form.Group> */}
       </Row>
-      <Form.Group className="mb-3">
-        <Form.Check
-          required
-          label="Agree to terms and conditions"
-          feedback="You must agree before submitting."
-          feedbackType="invalid"
-        />
-      </Form.Group>
       <Button type="submit">Register</Button>
     </Form>
   );

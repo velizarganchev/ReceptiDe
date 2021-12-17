@@ -8,7 +8,7 @@ export const Create = async (recipeData, token) => {
       "content-type": "aplication/json",
       "X-Authorization": token,
     },
-    body: JSON.stringify(recipeData),
+    body: JSON.stringify({...recipeData, likes: []}),
   });
 
   let res = await response.json();

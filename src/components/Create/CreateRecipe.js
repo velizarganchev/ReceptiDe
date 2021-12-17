@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Form, Button, FormGroup } from "react-bootstrap";
 import * as recipeService from "../../services/recipeService";
-import { AuthContext } from "../../contexts/authContext";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const CreateRecipe = () => {
   const { user } = useContext(AuthContext);

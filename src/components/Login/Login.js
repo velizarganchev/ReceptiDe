@@ -6,14 +6,12 @@ import {
   FormControl,
   Button,
 } from "react-bootstrap";
-
-import { useContext } from "react";
 import { useNavigate } from "react-router";
-import { AuthContext } from "../../contexts/authContext";
+import { useAuthContext } from "../../contexts/AuthContext";
 import * as authService from "../../services/authService";
 
 const Login = () => {
-  const { login } = useContext(AuthContext);
+  const { login } = useAuthContext();
   const navigate = useNavigate();
 
   const onLogin = (e) => {

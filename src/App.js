@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-import { AuthContext } from "./contexts/authContext";
+import { AuthProvider } from "./contexts/AuthContext";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -35,7 +35,8 @@ function App() {
   }
 
   return (
-    <AuthContext.Provider value={{ user, login }}>
+    <AuthProvider>   
+      {/* FIX IT !!!!!!!!!!       */}
       <div className="App">
         <Header email={user.email} />
         <main className="site-content">
@@ -54,7 +55,7 @@ function App() {
         </main>
         <Footer />
       </div>
-    </AuthContext.Provider>
+      </AuthProvider>
   );
 }
 export default App;

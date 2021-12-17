@@ -19,7 +19,7 @@ const Header = ({ email }) => {
       <Nav.Link as={Link} to={"/create-recipe"}>
         Create Recipe
       </Nav.Link>
-      <Nav.Link as={Link} to={"/"}>
+      <Nav.Link as={Link} to={"/home"}>
         Logout
       </Nav.Link>
     </>
