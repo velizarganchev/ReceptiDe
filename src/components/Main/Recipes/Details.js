@@ -1,10 +1,11 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as recipeService from "../../../services/recipeService";
 import { AuthContext } from "../../../contexts/AuthContext";
 
 const Details = () => {
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [recipe, setRecipe] = useState([]);
   const { recipeId } = useParams();
@@ -20,12 +21,18 @@ const Details = () => {
       });
   }, [recipeId]);
 
+  const onDelete = () => {
+    recipeService.Remove(recipeId, user.accessToken).then(() => {
+      navigate("/Home");
+    });
+  };
+
   const ownerButton = (
     <>
       <Link to={"/edit"} type="button" className="btn btn-warning">
         Edit
       </Link>
-      <button type="button" className="btn btn-danger">
+      <button type="button" className="btn btn-danger" onClick={onDelete}>
         Delete
       </button>
     </>
@@ -62,7 +69,6 @@ const Details = () => {
       </div>
       <div>
         {user._id && (recipe._ownerId === user._id ? ownerButton : guestButton)}
-
         <div className="likes">
           <span>Likes: {recipe.likes?.length}</span>
         </div>
