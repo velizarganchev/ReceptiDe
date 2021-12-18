@@ -14,7 +14,6 @@ const Details = () => {
     recipeService
       .GetRecipe(recipeId)
       .then((res) => {
-        console.log(res)
         setRecipe(res);
       })
       .catch((err) => {
@@ -30,7 +29,7 @@ const Details = () => {
 
   const ownerButton = (
     <>
-      <Link to={"/edit"} type="button" className="btn btn-warning">
+      <Link to={`/edit/${recipeId}`} type="button" className="btn btn-warning">
         Edit
       </Link>
       <button type="button" className="btn btn-danger" onClick={onDelete}>

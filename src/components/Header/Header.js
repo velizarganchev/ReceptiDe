@@ -1,8 +1,7 @@
-import { Navbar, Container, Nav, NavDropdown} from "react-bootstrap";
-import { Link, useNavigate} from "react-router-dom";
+import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthContext";
 import * as authService from "../../services/authService";
-
 
 const Header = () => {
   const navigate = useNavigate();
@@ -10,11 +9,11 @@ const Header = () => {
 
   const onLogout = (e) => {
     e.preventDefault();
-    
-      authService.logout(user.accessToken).then(() => {
-        logout();
-        navigate("/Home");
-      });
+
+    authService.logout(user.accessToken).then(() => {
+      logout();
+      navigate("/Home");
+    });
 
     return null;
   };
@@ -31,13 +30,11 @@ const Header = () => {
 
   let authenticatedUser = (
     <>
-      <span>Welcome {user.email}</span>
+      <span className="welcome">Welcome {user.email}</span>
       <Nav.Link as={Link} to={"/create-recipe"}>
         Create Recipe
       </Nav.Link>
-      <Nav.Link onClick={onLogout}>
-        Logout
-      </Nav.Link>
+      <Nav.Link onClick={onLogout}>Logout</Nav.Link>
     </>
   );
   return (
@@ -77,9 +74,13 @@ const Header = () => {
                   </Nav.Link>
                 </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link as={Link} to={"/my-recipes"}>
-                My Recipes
-              </Nav.Link>
+              {user.email ? (
+                <Nav.Link as={Link} to={"/my-recipes"}>
+                  My Recipes
+                </Nav.Link>
+              ) : (
+                ""
+              )}
             </Nav>
             <Nav>{user.email ? authenticatedUser : guestUser}</Nav>
           </Navbar.Collapse>

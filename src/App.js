@@ -16,14 +16,13 @@ import Salads from "./components/Main/Categories/Salads/Salads";
 import Desserts from "./components/Main/Categories/Desserts/Desserts.js.js";
 import MyRecipes from "./components/MyRecipe/MyRecipes";
 import Details from "./components/Main/Recipes/Details";
+import EditRecipe from "./components/Edit/EditRecipe";
 
 function App() {
-  
-
   return (
     <AuthProvider>
       <div className="App">
-        <Header  />
+        <Header />
         <main className="site-content">
           <Routes>
             <Route path="/*" element={<Dashboard />} />
@@ -36,11 +35,12 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/create-recipe" element={<CreateRecipe />} />
             <Route path="/recipeDetails/:recipeId" element={<Details />} />
+            <Route path="/edit/:recipeId" element={<EditRecipe />} />
           </Routes>
         </main>
         <Footer />
       </div>
-      </AuthProvider>
+    </AuthProvider>
   );
 }
 export default App;

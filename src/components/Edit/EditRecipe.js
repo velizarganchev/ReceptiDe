@@ -1,21 +1,36 @@
 import { Form, Button, FormGroup } from "react-bootstrap";
-
-
+import * as recipeService from "../../services/recipeService";
+import { useState, useEffect } from "react";
+import useRecipeState from "../../hooks/useRecipeState"
+import { useParams } from "react-router-dom";
 
 const EditRecipe = () => {
+  const [categories, setCategories] = useState([]);
+  const { recipeId } = useParams();
+  console.log(recipeId)
+  const [recipe, setRecipe] = useRecipeState(recipeId);
+  console.log(recipe)
 
+  useEffect(() => {
+    recipeService.GetCategories().then((res) => {
+      setCategories(Object.values(res));
+    });
+  }, []);
 
-const onRecipeEdit = (e) => {
-    
+  const onRecipeEdit = (e) => {
+    e.preventDefault();
 
-}
+    let recipeData = Object.fromEntries(new FormData(e.currentTarget));
+
+    recipeService.update(recipe._id, recipeData);
+  };
 
   return (
     <>
       <div className="row">
         <div className="col-sm-12 offset-lg-2 col-lg-8 offset-xl-2 col-xl-8">
           <h2 className="heading-margin text-center text-dark">
-            Create Recipe
+            Edite Recipe
           </h2>
           <Form onSubmit={onRecipeEdit} method="PUT">
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -24,6 +39,7 @@ const onRecipeEdit = (e) => {
                 type="text"
                 placeholder="Pork belly recipes"
                 name="title"
+                defaultValue={recipe.title}
               />
             </Form.Group>
 

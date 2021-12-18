@@ -29,8 +29,11 @@ export const GetRecipe = (recipeId) => {
   return fetch(`${baseUrl}/data/recipes/${recipeId}`).then((res) => res.json());
 };
 
-export const GetRecipebyName = (recipeName) => {
-  return fetch(`${baseUrl}/data/recipes/${recipeName}`).then((res) => res.json());
+export const update = (recipeId, recipeData) => request.put(`${baseUrl}/data/recipes/${recipeId}`, recipeData);
+
+export const getOne = (recipeId, signal) => {
+    return fetch(`${baseUrl}/recipes/${recipeId}`, { signal })
+        .then(res => res.json())
 };
 
 export const GetCategories = () => {
