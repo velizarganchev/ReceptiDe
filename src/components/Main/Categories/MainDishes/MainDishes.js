@@ -5,7 +5,7 @@ import RecipeCard from "../../Recipes/RecipeCard";
 const MainDishes = () => {
   const [recipe, setRecipe] = useState([]);
 
-  useEffect(() => {
+  useEffect(() => { 
     recipeService
       .GetRecipes()
       .then((res) => {

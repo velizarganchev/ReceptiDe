@@ -125,13 +125,21 @@ h6 {
   align-items: flex-start;
   flex-direction: column;
   flex-wrap: wrap;
+  margin-right: -115px;
 }
 .openRecipeBootomDetails {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 }
-.detaislCell{
+.detaislCell {
   display: flex;
   justify-content: space-between;
+}
+.detailCellNumber {
+  font-size: 30px;
+  padding-left: 20px;
+}
+.serves {
+  padding-right: 29px;
 }

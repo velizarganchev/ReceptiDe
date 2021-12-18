@@ -14,6 +14,7 @@ const Details = () => {
     recipeService
       .GetRecipe(recipeId)
       .then((res) => {
+        console.log(res)
         setRecipe(res);
       })
       .catch((err) => {
@@ -55,15 +56,15 @@ const Details = () => {
         <section className="openRecipeRightDetails">
           <div className="detaislCell">
             <div className="detailCellImage">
-              <i className="fas fa-clock"></i>
+              <i className="fas fa-clock fa-3x"></i>
             </div>
             <span className="detailCellNumber">{recipe.cookTime}</span>
           </div>
           <div className="detaislCell">
             <div className="detailCellImage">
-              <i className="fas fa-utensils"></i>
+              <i className="fas fa-utensils fa-3x"></i>
             </div>
-            <span className="detailCellNumber">x{recipe.serves}</span>
+            <span className="detailCellNumber serves">x{recipe.serves}</span>
           </div>
         </section>
       </div>

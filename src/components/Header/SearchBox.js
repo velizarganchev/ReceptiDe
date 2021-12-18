@@ -7,27 +7,29 @@ import { useNavigate } from "react-router";
 //izvikvam get recipes i filtriram po ime !!!!!!!!!
 
 const SearchBox = () => {
-  const [recipe, setRecipe] = useState([]);
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   recipeService
-  //     .GetRecipes()
-  //     .then((res) => {
-  //       let currRecipe = res.filter((x) => x.title === " Family one-pot recipes");
-  //       console.log(currRecipe)
-  //       setRecipe(currRecipe);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
 
   const onSearch = (e) => {
     e.preventDefault();
 
     const imput = new FormData(e.currentTarget);
-    var search = imput.get("searchImput");
+    var recipeName = imput.get("searchImput");
+    
+    recipeService
+        .GetRecipes()
+        .then((res) => {
+          const searcedRecipe = res.find(recipe => recipe.title === recipeName)
+          if (searcedRecipe) {
+            navigate(`recipeDetails/${searcedRecipe._id}`);
+          }else{
+            navigate('/recipe-not-fount')
+          }
+          
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
   };
 
   return (

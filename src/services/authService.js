@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3030";
+const baseUrl = "http://softuni-custom-server.herokuapp.com";
 
 export const Register = (email, password) => {
   return fetch(`${baseUrl}/users/register`, {

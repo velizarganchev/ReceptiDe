@@ -9,7 +9,7 @@ const Soups = () => {
     recipeService
       .GetRecipes()
       .then((res) => {
-        let soups = res.filter((x) => x.category === "Soups");
+        let soups = res.filter((x) => x.category === "Soups"); 
         setRecipe(soups);
       })
       .catch((err) => {
