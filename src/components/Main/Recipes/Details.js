@@ -20,6 +20,22 @@ const Details = () => {
       });
   }, [recipeId]);
 
+  const ownerButton = (
+    <>
+      <Link to={"/edit"} type="button" className="btn btn-warning">
+        Edit
+      </Link>
+      <button type="button" className="btn btn-danger">
+        Delete
+      </button>
+    </>
+  );
+  const guestButton = (
+    <button type="button" className="btn btn-info">
+      Like
+    </button>
+  );
+
   return (
     <article className="openRecipe">
       <div className="openRecipeBackground">
@@ -45,20 +61,7 @@ const Details = () => {
         </section>
       </div>
       <div>
-        {user._id && recipe._ownerId === user._id ? 
-          <>
-            <Link to={"/edit"} type="button" className="btn btn-warning">
-              Edit
-            </Link>
-            <button type="button" className="btn btn-danger">
-              Delete
-            </button>
-          </>
-         : 
-          <button type="button" className="btn btn-info">
-            Like
-          </button>
-        }
+        {user._id && (recipe._ownerId === user._id ? ownerButton : guestButton)}
 
         <div className="likes">
           <span>Likes: {recipe.likes?.length}</span>

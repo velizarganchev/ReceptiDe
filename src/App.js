@@ -1,6 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
-
 import { AuthProvider } from "./contexts/AuthContext";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -20,25 +18,12 @@ import MyRecipes from "./components/MyRecipe/MyRecipes";
 import Details from "./components/Main/Recipes/Details";
 
 function App() {
-  const [user, setUser] = useState({
-    accessToken: "",
-    email: "",
-    _id: "",
-  });
-
-  const login = (authData) => {
-    setUser(authData);
-  };
-
-  const logout = () => {
-    // TODO
-  }
+  
 
   return (
-    <AuthProvider>   
-      {/* FIX IT !!!!!!!!!!       */}
+    <AuthProvider>
       <div className="App">
-        <Header email={user.email} />
+        <Header  />
         <main className="site-content">
           <Routes>
             <Route path="/*" element={<Dashboard />} />
