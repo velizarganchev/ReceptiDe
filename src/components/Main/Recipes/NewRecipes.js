@@ -16,7 +16,7 @@ const NewRecipes = () => {
       });
   }, []);
 
-  if (recipe.length > 0) {
+  if (recipe.length > 0 ) {
     return (
       <section className="container">
         <h2 className="sectionTitle">New Recipes</h2>

@@ -4,3 +4,4 @@
 @import "./AppStyle/recipeCard.css";
 @import "./AppStyle/details.css";
 @import "./AppStyle/footer.css";
+@import "bootstrap/dist/css/bootstrap.min.css";

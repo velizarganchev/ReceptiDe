@@ -5,6 +5,7 @@ import { useAuthContext } from "../../contexts/AuthContext";
 
 const MyRecipes = () => {
   const { user } = useAuthContext();
+  console.log(user)
 
   const [recipe, setRecipe] = useState([]);
   useEffect(() => {

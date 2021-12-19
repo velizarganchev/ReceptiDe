@@ -1,4 +1,5 @@
 import { request } from "./requester";
+
 const baseUrl = "http://softuni-custom-server.herokuapp.com/data";
 
 export const Create = async (recipeData, token) => {
@@ -42,5 +43,5 @@ export const getOne = (recipeId, signal) => {
 export const GetCategories = () => {
   return request(
     "http://softuni-custom-server.herokuapp.com/jsonstore/recipeCategories"
-  );
+  ).then((res) => Object.values(res));
 };

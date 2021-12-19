@@ -1,19 +1,20 @@
-import { useContext } from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { Form, Button, FormGroup } from "react-bootstrap";
+
 import * as recipeService from "../../services/recipeService";
-import { AuthContext } from "../../contexts/AuthContext";
+import { useAuthContext } from "../../contexts/AuthContext";
 
 const CreateRecipe = () => {
-  const { user } = useContext(AuthContext);
+  
   const navigate = useNavigate();
+
+  const { user } = useAuthContext();
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     recipeService.GetCategories().then((res) => {
-      setCategories(Object.values(res));
+      setCategories(res);
     });
   }, []);
 

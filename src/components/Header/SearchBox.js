@@ -1,10 +1,6 @@
-import { FormControl, Form, Button } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { useState, useEffect } from "react";
-import * as recipeService from "../../services/recipeService";
 import { useNavigate } from "react-router";
-
-//izvikvam get recipes i filtriram po ime !!!!!!!!!
+import { FormControl, Form, Button } from "react-bootstrap";
+import * as recipeService from "../../services/recipeService";
 
 const SearchBox = () => {
   const navigate = useNavigate();
