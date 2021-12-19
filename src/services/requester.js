@@ -1,4 +1,5 @@
-export const request = async (url) => {
+export const request = async (url, method, data) => {
+
   return fetch(url).then(responseHandler);
 };
 
@@ -6,7 +7,7 @@ async function responseHandler(res) {
   let jsonData = await res.json();
 
   if (res.ok) {
-    return Object.values(jsonData);
+    return jsonData;
   } else {
     throw jsonData;
   }

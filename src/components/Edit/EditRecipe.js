@@ -9,7 +9,6 @@ const EditRecipe = () => {
 
   const { recipeId } = useParams();
   const [recipe, setRecipe] = useRecipeState(recipeId);
-  console.log(recipe);
 
   useEffect(() => {
     recipeService.GetCategories().then((res) => {
@@ -40,12 +39,12 @@ const EditRecipe = () => {
                 defaultValue={recipe.title}
               />
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Ingredients</Form.Label>
               <Form.Control
                 as="textarea"
                 name="ingredients"
+                defaultValue={recipe.ingredients}
                 rows={3}
                 placeholder="1.3kg piece pork belly, boned, rind left on and scored (ask your butcher to do this, 2 tsp sunflower oil)"
               />
@@ -58,14 +57,14 @@ const EditRecipe = () => {
               <Form.Control
                 as="textarea"
                 name="method"
+                defaultValue={recipe.method}
                 rows={3}
                 placeholder="Heat oven to 180C/fan 160C/gas 4. Lay the pork, skin-side up, on a rack in a roasting tin. Trickle with a little oil,....... "
               />
             </Form.Group>
-
             <FormGroup className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Categories</Form.Label>
-              <Form.Select name="category">
+              <Form.Select name="category" >
                 {categories.map((x) => (
                   <option key={x._id} value={x.name}>
                     {x.name}
@@ -73,39 +72,42 @@ const EditRecipe = () => {
                 ))}
               </Form.Select>
             </FormGroup>
-
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Cook Time</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="3 hrs and 30 mins"
                 name="cookTime"
+                defaultValue={recipe.cookTime}
               />
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Serves</Form.Label>
-              <Form.Control type="text" placeholder="6" name="serves" />
+              <Form.Control
+                type="text"
+                placeholder="6"
+                name="serves"
+                defaultValue={recipe.serves}
+              />
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Picture Url</Form.Label>
               <Form.Control
                 type="url"
                 placeholder="https://www.recepis.de"
                 name="pictureUrl"
+                defaultValue={recipe.pictureUrl}
               />
             </Form.Group>
-
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Video Url</Form.Label>
               <Form.Control
                 type="url"
                 placeholder="https://www.recepis.de"
                 name="videoUrl"
+                defaultValue={recipe.videoUrl}
               />
             </Form.Group>
-
             <Button variant="primary" type="submit">
               Submit
             </Button>

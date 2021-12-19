@@ -5,10 +5,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 
-import CreateRecipe from "./components/Create/CreateRecipe";
 import Header from "./components/Header/Header";
 import Login from "./components/Login/Login";
 import Register from "./components/Main/Register/Register";
+import CreateRecipe from "./components/Create/CreateRecipe";
+import EditRecipe from "./components/Edit/EditRecipe";
 import Footer from "./components/Main/Footer/Footer";
 import Dashboard from "./components/Main/Dashboard/Dashboard";
 import MainDishes from "./components/Main/Categories/MainDishes/MainDishes";
@@ -17,7 +18,6 @@ import Salads from "./components/Main/Categories/Salads/Salads";
 import Desserts from "./components/Main/Categories/Desserts/Desserts.js.js";
 import MyRecipes from "./components/MyRecipe/MyRecipes";
 import Details from "./components/Main/Recipes/Details";
-import EditRecipe from "./components/Edit/EditRecipe";
 
 function App() {
   return (
