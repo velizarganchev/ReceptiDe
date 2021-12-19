@@ -1,15 +1,15 @@
 import { Form, Button, FormGroup } from "react-bootstrap";
 import * as recipeService from "../../services/recipeService";
 import { useState, useEffect } from "react";
-import useRecipeState from "../../hooks/useRecipeState"
+import useRecipeState from "../../hooks/useRecipeState";
 import { useParams } from "react-router-dom";
 
 const EditRecipe = () => {
   const [categories, setCategories] = useState([]);
+
   const { recipeId } = useParams();
-  console.log(recipeId)
   const [recipe, setRecipe] = useRecipeState(recipeId);
-  console.log(recipe)
+  console.log(recipe);
 
   useEffect(() => {
     recipeService.GetCategories().then((res) => {
@@ -29,9 +29,7 @@ const EditRecipe = () => {
     <>
       <div className="row">
         <div className="col-sm-12 offset-lg-2 col-lg-8 offset-xl-2 col-xl-8">
-          <h2 className="heading-margin text-center text-dark">
-            Edite Recipe
-          </h2>
+          <h2 className="heading-margin text-center text-dark">Edite Recipe</h2>
           <Form onSubmit={onRecipeEdit} method="PUT">
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Title</Form.Label>

@@ -3,7 +3,6 @@ import Categories from "../Categories/Categories";
 import NewRecipes from "../Recipes/NewRecipes";
 
 const Dashboard = () => {
-
   return (
     <>
       <SearchBox />

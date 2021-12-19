@@ -14,22 +14,20 @@ const SearchBox = () => {
 
     const imput = new FormData(e.currentTarget);
     var recipeName = imput.get("searchImput");
-    
-    recipeService
-        .GetRecipes()
-        .then((res) => {
-          const searcedRecipe = res.find(recipe => recipe.title === recipeName)
-          if (searcedRecipe) {
-            navigate(`recipeDetails/${searcedRecipe._id}`);
-          }else{
-            navigate('/recipe-not-fount')
-          }
-          
-        })
-        .catch((err) => {
-          console.log(err);
-        });
 
+    recipeService
+      .GetRecipes()
+      .then((res) => {
+        const searcedRecipe = res.find((recipe) => recipe.title === recipeName);
+        if (searcedRecipe) {
+          navigate(`recipeDetails/${searcedRecipe._id}`);
+        } else {
+          navigate("/recipe-not-fount");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

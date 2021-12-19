@@ -1,34 +1,27 @@
-import { Link } from "react-router-dom";
-
 const Footer = () => {
   return (
     <footer className="footer">
       <article>
         <ul className="footer-social-media">
           <li>
-            <Link to={"https://www.facebook.com/"} className="icon">
+            <a href="https://www.facebook.com" className="icon">
               <i className="fab fa-facebook-f"></i>
-            </Link>
+            </a>
           </li>
           <li>
-            <Link to={{}} className="icon">
+            <a href="https://twitter.com" className="icon">
               <i className="fab fa-twitter"></i>
-            </Link>
+            </a>
           </li>
           <li>
-            <Link to={{}} className="icon">
-              <i className="fab fa-google-plus-g"></i>
-            </Link>
-          </li>
-          <li>
-            <Link to={{}} className="icon">
+            <a href="https://www.youtube.com" className="icon">
               <i className="fab fa-youtube"></i>
-            </Link>
+            </a>
           </li>
           <li>
-            <Link to={{}} className="icon">
+            <a href="https://www.instagram.com" className="icon">
               <i className="fab fa-instagram"></i>
-            </Link>
+            </a>
           </li>
         </ul>
       </article>
