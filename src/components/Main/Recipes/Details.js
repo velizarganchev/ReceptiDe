@@ -4,11 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 
 import * as recipeService from "../../../services/recipeService";
 import { useAuthContext } from "../../../contexts/AuthContext";
+import ConfirmDialog, { ConfitmDialog } from "../../Common/ConfirmDialog";
 
 const Details = () => {
   const navigate = useNavigate();
   const { user } = useAuthContext();
   const [recipe, setRecipe] = useState([]);
+  const [deleteDialog, setDeleteDialog] = useState(false);
   const { recipeId } = useParams();
 
   useEffect(() => {
@@ -22,10 +24,19 @@ const Details = () => {
       });
   }, [recipeId]);
 
-  const onDelete = () => {
-    recipeService.Remove(recipeId, user.accessToken).then(() => {
-      navigate("/Home");
-    });
+  const onDeleteHandler = () => {
+    recipeService
+      .Remove(recipeId, user.accessToken)
+      .then(() => {
+        navigate("/Home");
+      })
+      .finally(() => {
+        setDeleteDialog(false);
+      });
+  };
+
+  const onDeleteClickHandler = () => {
+    setDeleteDialog(true);
   };
 
   const ownerButton = (
@@ -33,7 +44,11 @@ const Details = () => {
       <Link to={`/edit/${recipeId}`} type="button" className="btn btn-warning">
         Edit
       </Link>
-      <button type="button" className="btn btn-danger" onClick={onDelete}>
+      <button
+        type="button"
+        className="btn btn-danger"
+        onClick={onDeleteClickHandler}
+      >
         Delete
       </button>
     </>
@@ -45,50 +60,58 @@ const Details = () => {
   );
 
   return (
-    <article className="openRecipe">
-      <div className="openRecipeBackground">
-        <div className="openRecipeBackgroundFront">
-          <h1 className="openRecipeTitle">{recipe.title}</h1>
-          <figure className="mainImage">
-            <img src={recipe.pictureUrl} alt="" />
-          </figure>
-        </div>
-        <section className="openRecipeRightDetails">
-          <div className="detaislCell">
-            <div className="detailCellImage">
-              <i className="fas fa-clock fa-3x"></i>
-            </div>
-            <span className="detailCellNumber">{recipe.cookTime}</span>
+    <>
+      <ConfirmDialog
+        show={deleteDialog}
+        close={() => setDeleteDialog(false)}
+        onDelete={onDeleteHandler}
+      />
+      <article className="openRecipe">
+        <div className="openRecipeBackground">
+          <div className="openRecipeBackgroundFront">
+            <h1 className="openRecipeTitle">{recipe.title}</h1>
+            <figure className="mainImage">
+              <img src={recipe.pictureUrl} alt="" />
+            </figure>
           </div>
-          <div className="detaislCell">
-            <div className="detailCellImage">
-              <i className="fas fa-utensils fa-3x"></i>
+          <section className="openRecipeRightDetails">
+            <div className="detaislCell">
+              <div className="detailCellImage">
+                <i className="fas fa-clock fa-3x"></i>
+              </div>
+              <span className="detailCellNumber">{recipe.cookTime}</span>
             </div>
-            <span className="detailCellNumber serves">x{recipe.serves}</span>
-          </div>
-        </section>
-      </div>
-      <div>
-        {user._id && (recipe._ownerId === user._id ? ownerButton : guestButton)}
-        <div className="likes">
-          <span>Likes: {recipe.likes?.length}</span>
-        </div>
-      </div>
-      <div className="openRecipeBootomDetails">
-        <div className="LeftSide">
-          <section className="ingredients">
-            <h3 className="ingredientsTitle">Ingredients</h3>
-            <p>{recipe.ingredients}</p>
+            <div className="detaislCell">
+              <div className="detailCellImage">
+                <i className="fas fa-utensils fa-3x"></i>
+              </div>
+              <span className="detailCellNumber serves">x{recipe.serves}</span>
+            </div>
           </section>
         </div>
-        <div className="RightSide">
-          <section className="cookingSteps">
-            <h3 className="cookingStepsTitle">Cooking Steps</h3>
-            <p>{recipe.method}</p>
-          </section>
+        <div>
+          {user._id &&
+            (recipe._ownerId === user._id ? ownerButton : guestButton)}
+          <div className="likes">
+            <span>Likes: {recipe.likes?.length}</span>
+          </div>
         </div>
-      </div>
-    </article>
+        <div className="openRecipeBootomDetails">
+          <div className="LeftSide">
+            <section className="ingredients">
+              <h3 className="ingredientsTitle">Ingredients</h3>
+              <p>{recipe.ingredients}</p>
+            </section>
+          </div>
+          <div className="RightSide">
+            <section className="cookingSteps">
+              <h3 className="cookingStepsTitle">Cooking Steps</h3>
+              <p>{recipe.method}</p>
+            </section>
+          </div>
+        </div>
+      </article>
+    </>
   );
 };
 export default Details;

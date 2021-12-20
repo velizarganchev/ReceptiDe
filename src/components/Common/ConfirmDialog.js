@@ -1,24 +1,23 @@
 import { Modal, Button } from "react-bootstrap";
 
-const ConfirmDialog = () => {
-
-
-    
+const ConfirmDialog = ({ show, close, onDelete }) => {
   return (
-    <Modal.Dialog>
+    <Modal show={show} onHide={close}>
       <Modal.Header closeButton>
-        <Modal.Title>Modal title</Modal.Title>
+        <Modal.Title>Delete Recipe</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
-        <p>Modal body text goes here.</p>
+        <p>Are you sure you want to delete the recipe?</p>
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant="secondary">Close</Button>
-        <Button variant="primary">Save changes</Button>
+        <Button variant="secondary" onClick={close}>
+          Close
+        </Button>
+        <Button variant="danger" onClick={onDelete}>Delete</Button>
       </Modal.Footer>
-    </Modal.Dialog>
+    </Modal>
   );
 };
 export default ConfirmDialog;
