@@ -12,11 +12,11 @@ const NewRecipes = () => {
         setRecipe(res);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.message);
       });
   }, []);
 
-  if (recipe.length > 0 ) {
+  if (recipe.length > 0) {
     return (
       <section className="container">
         <h2 className="sectionTitle">New Recipes</h2>

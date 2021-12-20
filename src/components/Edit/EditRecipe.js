@@ -24,6 +24,10 @@ const EditRecipe = () => {
     recipeService.update(recipe._id, recipeData);
   };
 
+  const nameValidation = (e) => {
+    console.log(e.target.value);
+  };
+
   return (
     <>
       <div className="row">
@@ -37,6 +41,7 @@ const EditRecipe = () => {
                 placeholder="Pork belly recipes"
                 name="title"
                 defaultValue={recipe.title}
+                onBlur={nameValidation}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -64,7 +69,7 @@ const EditRecipe = () => {
             </Form.Group>
             <FormGroup className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Categories</Form.Label>
-              <Form.Select name="category" >
+              <Form.Select name="category">
                 {categories.map((x) => (
                   <option key={x._id} value={x.name}>
                     {x.name}
@@ -109,7 +114,7 @@ const EditRecipe = () => {
               />
             </Form.Group>
             <Button variant="primary" type="submit">
-              Submit
+              Edit
             </Button>
           </Form>
         </div>

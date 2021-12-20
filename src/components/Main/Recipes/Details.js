@@ -2,27 +2,18 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 
+import useRecipeState from "../../../hooks/useRecipeState";
 import * as recipeService from "../../../services/recipeService";
 import { useAuthContext } from "../../../contexts/AuthContext";
-import ConfirmDialog, { ConfitmDialog } from "../../Common/ConfirmDialog";
+import ConfirmDialog  from "../../Common/ConfirmDialog";
 
 const Details = () => {
-  const navigate = useNavigate();
-  const { user } = useAuthContext();
-  const [recipe, setRecipe] = useState([]);
-  const [deleteDialog, setDeleteDialog] = useState(false);
-  const { recipeId } = useParams();
 
-  useEffect(() => {
-    recipeService
-      .GetRecipe(recipeId)
-      .then((res) => {
-        setRecipe(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [recipeId]);
+  const navigate = useNavigate();
+  const { recipeId } = useParams();
+  const [recipe, setRecipe] = useRecipeState(recipeId);
+  const { user } = useAuthContext();
+  const [deleteDialog, setDeleteDialog] = useState(false);
 
   const onDeleteHandler = () => {
     recipeService
@@ -41,12 +32,16 @@ const Details = () => {
 
   const ownerButton = (
     <>
-      <Link to={`/edit/${recipeId}`} type="button" className="btn btn-warning">
+      <Link
+        to={`/edit/${recipeId}`}
+        type="button"
+        className="btn btn-warning btnDetails"
+      >
         Edit
       </Link>
       <button
         type="button"
-        className="btn btn-danger"
+        className="btn btn-danger btnDetails"
         onClick={onDeleteClickHandler}
       >
         Delete

@@ -27,9 +27,9 @@ export const Remove = (recipeId, token) => {
 export const GetRecipes = () =>
   request(`${baseUrl}/recipes`).then((res) => Object.values(res));
 
-export const GetRecipe = (recipeId) => {
-  return request(`${baseUrl}/recipes/${recipeId}`);
-};
+// export const GetRecipe = (recipeId) => {
+//   return request(`${baseUrl}/recipes/${recipeId}`);
+// };
 
 export const update = (recipeId, recipeData) =>
   request.put(`${baseUrl}/recipes/${recipeId}`, recipeData);
