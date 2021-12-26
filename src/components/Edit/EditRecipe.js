@@ -1,14 +1,22 @@
-import { Form, Button, FormGroup } from "react-bootstrap";
+import { Form, Button, FormGroup, Alert } from "react-bootstrap";
 import * as recipeService from "../../services/recipeService";
 import { useState, useEffect } from "react";
 import useRecipeState from "../../hooks/useRecipeState";
 import { useParams } from "react-router-dom";
+import * as editHelper from "./Edithelper";
+import isOwner from "../../hoc/isOwner";
 
 const EditRecipe = () => {
   const [categories, setCategories] = useState([]);
 
   const { recipeId } = useParams();
   const [recipe, setRecipe] = useRecipeState(recipeId);
+  const [errors, setErrors] = useState({
+    title: "",
+    ingredient: "",
+    pictureUrl: "",
+    method: "",
+  });
 
   useEffect(() => {
     recipeService.GetCategories().then((res) => {
@@ -21,11 +29,44 @@ const EditRecipe = () => {
 
     let recipeData = Object.fromEntries(new FormData(e.currentTarget));
 
-    recipeService.update(recipe._id, recipeData);
+    recipeService.Update(recipe._id, recipeData);
   };
 
-  const nameValidation = (e) => {
-    console.log(e.target.value);
+  const onTitle = (e) => {
+    let data = editHelper.titelValidate(e.target.value);
+    setErrors((state) => ({
+      ...state,
+      title: data.title,
+    }));
+  };
+  const onIngredient = (e) => {
+    let data = editHelper.ingredientValidate(e.target.value);
+    setErrors((state) => ({
+      ...state,
+      ingredient: data.ingredient,
+    }));
+  };
+
+  const onMethod = (e) => {
+    let data = editHelper.methodValidate(e.target.value);
+    setErrors((state) => ({
+      ...state,
+      method: data.method,
+    }));
+  };
+  const onPicture = (e) => {
+    let data = editHelper.validURL(e.target.value);
+    if (!data) {
+      setErrors((state) => ({
+        ...state,
+        pictureUrl: "Please enter a valid url!",
+      }));
+    } else {
+      setErrors((state) => ({
+        ...state,
+        pictureUrl: "",
+      }));
+    }
   };
 
   return (
@@ -41,8 +82,12 @@ const EditRecipe = () => {
                 placeholder="Pork belly recipes"
                 name="title"
                 defaultValue={recipe.title}
-                onBlur={nameValidation}
+                onBlur={onTitle}
+                style={{ borderColor: errors.title ? "red" : "inherit" }}
               />
+              <Alert variant="danger" show={errors.title}>
+                {errors.title}
+              </Alert>
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Ingredients</Form.Label>
@@ -50,9 +95,13 @@ const EditRecipe = () => {
                 as="textarea"
                 name="ingredients"
                 defaultValue={recipe.ingredients}
+                onBlur={onIngredient}
                 rows={3}
                 placeholder="1.3kg piece pork belly, boned, rind left on and scored (ask your butcher to do this, 2 tsp sunflower oil)"
               />
+              <Alert variant="danger" show={errors.ingredient}>
+                {errors.ingredient}
+              </Alert>
             </Form.Group>
             <Form.Group
               className="mb-3"
@@ -63,9 +112,13 @@ const EditRecipe = () => {
                 as="textarea"
                 name="method"
                 defaultValue={recipe.method}
+                onBlur={onMethod}
                 rows={3}
                 placeholder="Heat oven to 180C/fan 160C/gas 4. Lay the pork, skin-side up, on a rack in a roasting tin. Trickle with a little oil,....... "
               />
+              <Alert variant="danger" show={errors.method}>
+                {errors.method}
+              </Alert>
             </Form.Group>
             <FormGroup className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Categories</Form.Label>
@@ -102,7 +155,11 @@ const EditRecipe = () => {
                 placeholder="https://www.recepis.de"
                 name="pictureUrl"
                 defaultValue={recipe.pictureUrl}
+                onBlur={onPicture}
               />
+              <Alert variant="danger" show={errors.pictureUrl}>
+                {errors.pictureUrl}
+              </Alert>
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Video Url</Form.Label>
@@ -122,4 +179,4 @@ const EditRecipe = () => {
     </>
   );
 };
-export default EditRecipe;
+export default isOwner(EditRecipe);

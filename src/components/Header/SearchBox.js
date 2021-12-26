@@ -14,12 +14,13 @@ const SearchBox = () => {
     recipeService
       .GetRecipes()
       .then((res) => {
-        const searcedRecipe = res.find((recipe) => recipe.title === recipeName);
-        if (searcedRecipe) {
-          navigate(`recipeDetails/${searcedRecipe._id}`);
-        } else {
-          navigate("/recipe-not-fount");
-        }
+        const searcedRecipe = res.filter((recipe) => recipe.title.includes(recipeName));
+        console.log(searcedRecipe)
+        // if (searcedRecipe) {
+        //   navigate(`recipeDetails/${searcedRecipe._id}`);
+        // } else {
+        //   navigate("/recipe-not-fount");
+        // }
       })
       .catch((err) => {
         console.log(err);

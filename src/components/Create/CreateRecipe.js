@@ -4,12 +4,11 @@ import { Form, Button, FormGroup } from "react-bootstrap";
 
 import * as recipeService from "../../services/recipeService";
 import { useAuthContext } from "../../contexts/AuthContext";
-
+import {isAuth} from "../../hoc/isAuth"
 const CreateRecipe = () => {
-  
   const navigate = useNavigate();
 
-  const { user } = useAuthContext();
+  const { user} = useAuthContext();
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -142,4 +141,4 @@ const CreateRecipe = () => {
     </>
   );
 };
-export default CreateRecipe;
+export default isAuth(CreateRecipe);

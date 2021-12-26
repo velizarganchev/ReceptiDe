@@ -31,7 +31,7 @@ export const GetRecipes = () =>
 //   return request(`${baseUrl}/recipes/${recipeId}`);
 // };
 
-export const update = (recipeId, recipeData) =>
+export const Update = (recipeId, recipeData) =>
   request.put(`${baseUrl}/recipes/${recipeId}`, recipeData);
 
 export const getOne = (recipeId, signal) => {

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import * as recipeService from "../../services/recipeService";
 import RecipeCard from "../Main/Recipes/RecipeCard";
 import { useAuthContext } from "../../contexts/AuthContext";
+import isAuth from "../../hoc/isAuth";
 
 const MyRecipes = () => {
   const { user } = useAuthContext();
@@ -29,4 +30,4 @@ const MyRecipes = () => {
     </section>
   );
 };
-export default MyRecipes;
+export default isAuth(MyRecipes);
