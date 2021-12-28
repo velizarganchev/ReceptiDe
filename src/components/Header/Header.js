@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthContext";
 import * as authService from "../../services/authService";
 
+
 const Header = () => {
   const navigate = useNavigate();
   const { user, logout } = useAuthContext();
@@ -10,10 +11,15 @@ const Header = () => {
   const onLogout = (e) => {
     e.preventDefault();
 
-    authService.logout(user.accessToken).then(() => {
-      logout();
-      navigate("/Home");
-    });
+    authService
+      .logout(user.accessToken)
+      .then(() => {
+        logout();
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
 
     return null;
   };
@@ -41,7 +47,7 @@ const Header = () => {
     <header className="App-header">
       <Navbar bg="light" expand="lg">
         <Container>
-          <Nav.Link as={Link} to={"/Home"}>
+          <Nav.Link as={Link} to={"/"}>
             <Navbar.Brand>
               <i className="fas fa-utensil-spoon fa-lg"></i>Recepti.de
             </Navbar.Brand>

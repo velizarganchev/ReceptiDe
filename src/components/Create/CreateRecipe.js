@@ -1,21 +1,14 @@
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, FormGroup } from "react-bootstrap";
 
 import * as recipeService from "../../services/recipeService";
-import { useAuthContext } from "../../contexts/AuthContext";
-import {isAuth} from "../../hoc/isAuth"
-const CreateRecipe = () => {
+import { isAuth } from "../../hoc/isAuth";
+import useGetCategories from "../../hooks/useGetCategories";
+
+const CreateRecipe = ({ user }) => {
   const navigate = useNavigate();
-
-  const { user} = useAuthContext();
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    recipeService.GetCategories().then((res) => {
-      setCategories(res);
-    });
-  }, []);
+  
+  const [categories, setCategories] = useGetCategories();
 
   const onRecipeCreate = (e) => {
     e.preventDefault();
@@ -47,6 +40,9 @@ const CreateRecipe = () => {
       )
       .then((res) => {
         navigate("/dashboard");
+      })
+      .catch((err) => {
+        console.log(err.message);
       });
   };
 

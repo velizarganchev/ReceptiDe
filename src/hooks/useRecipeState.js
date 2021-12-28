@@ -1,29 +1,30 @@
-import { useState, useEffect, useMemo } from 'react';
-import * as recipeService from "../services/recipeService"
+import { useState, useEffect, useMemo } from "react";
+import * as recipeService from "../services/recipeService";
 
 const useRecipeState = (recipeId) => {
-    const [recipe, setRecipe] = useState({});
+  const [recipe, setRecipe] = useState({});
 
-    const controller = useMemo(() => {
-        const controller = new AbortController();
+  const controller = useMemo(() => {
+    const controller = new AbortController();
 
-        return controller;
-    }, [])
+    return controller;
+  }, []);
 
-    useEffect(() => {
-        recipeService.getOne(recipeId, controller.signal)
-            .then(recipeRes => {
-                setRecipe(recipeRes);
-            })
+  useEffect(() => {
+    recipeService
+      .GetOne(recipeId, controller.signal)
+      .then((recipeRes) => {
+        setRecipe(recipeRes);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
 
-        return () => {
-            controller.abort();
-        }
-    }, [recipeId, controller]);
+    return () => {
+      controller.abort();
+    };
+  }, [recipeId, controller]);
 
-    return [
-        recipe,
-        setRecipe
-    ]
-}
+  return [recipe, setRecipe];
+};
 export default useRecipeState;

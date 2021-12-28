@@ -1,21 +1,9 @@
-import { useEffect, useState } from "react";
-import * as recipeService from "../../../../services/recipeService";
+import useGetRecipes from "../../../../hooks/useGetRecipes";
 import RecipeCard from "../../Recipes/RecipeCard";
 
 const MainDishes = () => {
-  const [recipe, setRecipe] = useState([]);
-
-  useEffect(() => { 
-    recipeService
-      .GetRecipes()
-      .then((res) => {
-        let mainDishes = res.filter((x) => x.category === "Main Dishes");
-        setRecipe(mainDishes);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  const filter = "Main Dishes";
+  const [recipe, setRecipe] = useGetRecipes(filter);
 
   if (recipe.length > 0) {
     return (

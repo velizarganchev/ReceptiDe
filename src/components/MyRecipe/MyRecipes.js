@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
 import * as recipeService from "../../services/recipeService";
 import RecipeCard from "../Main/Recipes/RecipeCard";
-import { useAuthContext } from "../../contexts/AuthContext";
-import isAuth from "../../hoc/isAuth";
+import isOwner from "../../hoc/isAuth";
 
-const MyRecipes = () => {
-  const { user } = useAuthContext();
-  console.log(user)
+const MyRecipes = ({user}) => {
 
   const [recipe, setRecipe] = useState([]);
   useEffect(() => {
@@ -30,4 +27,4 @@ const MyRecipes = () => {
     </section>
   );
 };
-export default isAuth(MyRecipes);
+export default isOwner(MyRecipes);

@@ -1,31 +1,25 @@
-import { Component } from 'react';
+import { Component } from "react";
 
 class ErrorBoundary extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            error: null
-        };
+    this.state = {
+      error: null,
+    };
+  }
+  static getDerivedStateFromError(error) {
+    return { error };
+  }
+  componentDidCatch(error) {
+    console.log(error);
+  }
+  render() {
+    if (this.state.error) {
+      return <h1 className="pageNotFound">Page Not Found</h1>;
     }
 
-    static getDerivedStateFromError(error) {
-        return {error};
-    }
-
-    componentDidCatch(error) {
-        console.log(error);
-    }
-
-    render() {
-        if (this.state.error) {
-            return (
-                <h1 className='pageNotFound'>Page Not Found</h1>
-            );
-        }
-
-        return this.props.children;
-    }
+    return this.props.children;
+  }
 }
-
 export default ErrorBoundary;

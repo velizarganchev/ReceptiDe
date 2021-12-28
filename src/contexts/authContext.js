@@ -22,9 +22,9 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, login, logout, isAuthenticated: Boolean(user.email)}}
+      value={{ user, login, logout, isAuthenticated: user.email }}
     >
-      {children} 
+      {children}
     </AuthContext.Provider>
   );
 };

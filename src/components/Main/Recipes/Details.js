@@ -1,14 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 
 import useRecipeState from "../../../hooks/useRecipeState";
 import * as recipeService from "../../../services/recipeService";
 import { useAuthContext } from "../../../contexts/AuthContext";
-import ConfirmDialog  from "../../Common/ConfirmDialog";
+import ConfirmDialog from "../../Common/ConfirmDialog";
 
 const Details = () => {
-
   const navigate = useNavigate();
   const { recipeId } = useParams();
   const [recipe, setRecipe] = useRecipeState(recipeId);
@@ -23,6 +22,9 @@ const Details = () => {
       })
       .finally(() => {
         setDeleteDialog(false);
+      })
+      .catch((err) => {
+        console.log(err.message);
       });
   };
 

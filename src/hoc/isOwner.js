@@ -5,11 +5,13 @@ import useRecipeState from "../hooks/useRecipeState";
 
 export const isOwner = (Component) => {
   const Wrapper = (props) => {
-    const { user } = useAuthContext();
+    const { user } = useAuthContext(); 
     const { recipeId } = useParams();
-    const [recipe, setRecipe] = useRecipeState(recipeId);
-    
-    return user._id === recipe._ownerId ? (
+
+    // console.log(user._id)
+    // console.log(recipeId)
+
+    return user._id  ? (
       <Component {...props} />
     ) : (
       <Navigate to="/" />

@@ -34,6 +34,8 @@ const Login = () => {
   };
 
   return (
+    <>
+    <h1>Login</h1>
     <Form onSubmit={onLogin}>
       <Row className="align-items-center">
         <Col xs="auto">
@@ -72,6 +74,7 @@ const Login = () => {
         </Col>
       </Row>
     </Form>
+    </>
   );
 };
 export default Login;

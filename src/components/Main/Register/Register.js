@@ -13,14 +13,20 @@ const Register = () => {
 
     let { email, password } = Object.fromEntries(new FormData(e.currentTarget));
 
-    authService.Register(email, password).then((authData) => {
-      login(authData);
-
-      navigate("/Home");
-    });
+    authService
+      .Register(email, password)
+      .then((authData) => {
+        login(authData);
+        navigate("/Home");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
   return (
+    <>
+    <h1>Register</h1>
     <Form onSubmit={onRegister} method="POST">
       <Row className="mb-3">
         <Form.Group
@@ -68,6 +74,7 @@ const Register = () => {
       </Row>
       <Button type="submit">Register</Button>
     </Form>
+    </>
   );
 };
 export default Register;

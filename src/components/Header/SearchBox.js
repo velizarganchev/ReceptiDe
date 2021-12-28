@@ -1,45 +1,67 @@
-import { useNavigate } from "react-router";
-import { FormControl, Form, Button } from "react-bootstrap";
-import * as recipeService from "../../services/recipeService";
+import { useState } from "react";
+import { FormControl, Form, Button, Alert } from "react-bootstrap";
 
-const SearchBox = () => {
-  const navigate = useNavigate();
+import RecipeCard from "../Main/Recipes/RecipeCard";
+
+const SearchBox = ({ recipes }) => {
+  const [recipe, setRecipe] = useState([]);
+  const [errors, setErrors] = useState({
+    search: "",
+  });
 
   const onSearch = (e) => {
     e.preventDefault();
 
     const imput = new FormData(e.currentTarget);
-    var recipeName = imput.get("searchImput");
+    let recipeName = imput.get("searchImput");
 
-    recipeService
-      .GetRecipes()
-      .then((res) => {
-        const searcedRecipe = res.filter((recipe) => recipe.title.includes(recipeName));
-        console.log(searcedRecipe)
-        // if (searcedRecipe) {
-        //   navigate(`recipeDetails/${searcedRecipe._id}`);
-        // } else {
-        //   navigate("/recipe-not-fount");
-        // }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const searcedRecipes = recipes.filter((recipe) =>
+      recipe.title.includes(recipeName)
+    );
+    setRecipe(searcedRecipes);
+
+    console.log(searcedRecipes.length);
+    if (searcedRecipes.length === 0) {
+      setErrors((state) => ({
+        ...state,
+        search: "Recipe Not Found!",
+      }));
+    } else {
+      setErrors((state) => ({
+        ...state,
+        search: "",
+      }));
+    }
   };
 
   return (
-    <Form className="d-flex search" onSubmit={onSearch}>
-      <FormControl
-        name="searchImput"
-        type="search"
-        placeholder="Search Recipe"
-        className="me-2"
-        aria-label="Search"
-      />
-      <Button variant="outline-success" type="submit">
-        Search
-      </Button>
-    </Form>
+    <>
+      <Form className="d-flex search" onSubmit={onSearch}>
+        <FormControl
+          name="searchImput"
+          type="search"
+          placeholder="Search Recipe"
+          className="me-2"
+          aria-label="Search"
+        />
+        <Button variant="outline-success" type="submit">
+          Search
+        </Button>
+      </Form>
+      <Alert variant="danger" show={errors.search}>
+        {errors.search}
+      </Alert>
+      {recipe.length > 0 ? (
+        <section className="container">
+          <h2 className="sectionTitle">Recipes found</h2>
+          {recipe.map((x) => (
+            <RecipeCard key={x._id} recipe={x} />
+          ))}
+        </section>
+      ) : (
+        <section className="container"></section>
+      )}
+    </>
   );
 };
 export default SearchBox;

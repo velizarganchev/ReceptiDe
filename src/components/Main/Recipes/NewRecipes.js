@@ -1,26 +1,12 @@
-import { useEffect, useState } from "react";
 import RecipeCard from "./RecipeCard";
-import * as recipeService from "../../../services/recipeService";
 
-const NewRecipes = () => {
-  const [recipe, setRecipe] = useState([]);
+const NewRecipes = ({recipes}) => {
 
-  useEffect(() => {
-    recipeService
-      .GetRecipes()
-      .then((res) => {
-        setRecipe(res);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, []);
-
-  if (recipe.length > 0) {
+  if (recipes.length > 0) {
     return (
       <section className="container">
         <h2 className="sectionTitle">New Recipes</h2>
-        {recipe.map((x) => (
+        {recipes.map((x) => (
           <RecipeCard key={x._id} recipe={x} />
         ))}
       </section>

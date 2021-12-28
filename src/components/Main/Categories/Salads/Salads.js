@@ -1,21 +1,9 @@
-import { useEffect, useState } from "react";
-import * as recipeService from "../../../../services/recipeService";
+import useGetRecipes from "../../../../hooks/useGetRecipes";
 import RecipeCard from "../../Recipes/RecipeCard";
 
 const Salads = () => {
-  const [recipe, setRecipe] = useState([]);
-
-  useEffect(() => {
-    recipeService
-      .GetRecipes()
-      .then((res) => {
-        let salads = res.filter((x) => x.category === "Salads");
-        setRecipe(salads);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  const filter = "Salads";
+  const [recipe, setRecipe] = useGetRecipes(filter);
 
   if (recipe.length > 0) {
     return (
