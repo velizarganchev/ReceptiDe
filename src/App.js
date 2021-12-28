@@ -6,7 +6,7 @@ import "./App.css";
 
 import Header from "./components/Header/Header";
 import Login from "./components/Login/Login";
-import Register from "./components/Main/Register/Register";
+import Register from "./components/Register/Register";
 import CreateRecipe from "./components/Create/CreateRecipe";
 import EditRecipe from "./components/Edit/EditRecipe";
 import Footer from "./components/Main/Footer/Footer";

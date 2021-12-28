@@ -1,5 +1,7 @@
 @import url("https://use.fontawesome.com/releases/v5.15.4/css/all.css");
 @import "./AppStyle/main.css";
+@import "./AppStyle/register.css";
+@import "./AppStyle/login.css";
 @import "./AppStyle/category.css";
 @import "./AppStyle/recipeCard.css";
 @import "./AppStyle/details.css";

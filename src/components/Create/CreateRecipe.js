@@ -1,14 +1,46 @@
 import { useNavigate } from "react-router-dom";
-import { Form, Button, FormGroup } from "react-bootstrap";
+import { Form, Button, FormGroup, Alert } from "react-bootstrap";
 
 import * as recipeService from "../../services/recipeService";
-import { isAuth } from "../../hoc/isAuth";
 import useGetCategories from "../../hooks/useGetCategories";
+import useValidate from "../../hooks/useValidate";
+import { isAuth } from "../../hoc/isAuth";
 
 const CreateRecipe = ({ user }) => {
   const navigate = useNavigate();
-  
-  const [categories, setCategories] = useGetCategories();
+
+  const [categories] = useGetCategories();
+  const [errors, setErrors] = useValidate();
+
+  const titleErrorHandler = (e) => {
+    let value = e.target.value;
+    setErrors(value, "title");
+  };
+  const ingredientErrorHandler = (e) => {
+    let value = e.target.value;
+    setErrors(value, "ingredient");
+  };
+  const methodErrorHandler = (e) => {
+    let value = e.target.value;
+    setErrors(value, "method");
+  };
+  const cookTimeErrorHandler = (e) => {
+    let value = e.target.value;
+    console.log(value);
+    setErrors(value, "cookTime");
+  };
+  const servesErrorHandler = (e) => {
+    let value = e.target.value;
+    setErrors(value, "serves");
+  };
+  const imageErrorHandler = (e) => {
+    let value = e.target.value;
+    setErrors(value, "pictureUrl");
+  };
+  const videoErrorHandler = (e) => {
+    let value = e.target.value;
+    setErrors(value, "videoUrl");
+  };
 
   const onRecipeCreate = (e) => {
     e.preventDefault();
@@ -60,7 +92,11 @@ const CreateRecipe = ({ user }) => {
                 type="text"
                 placeholder="Pork belly recipes"
                 name="title"
+                onBlur={titleErrorHandler}
               />
+              <Alert variant="danger" show={errors.title}>
+                {errors.title}
+              </Alert>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -68,9 +104,13 @@ const CreateRecipe = ({ user }) => {
               <Form.Control
                 as="textarea"
                 name="ingredients"
+                onBlur={ingredientErrorHandler}
                 rows={3}
                 placeholder="1.3kg piece pork belly, boned, rind left on and scored (ask your butcher to do this, 2 tsp sunflower oil)"
               />
+              <Alert variant="danger" show={errors.ingredient}>
+                {errors.ingredient}
+              </Alert>
             </Form.Group>
             <Form.Group
               className="mb-3"
@@ -80,9 +120,13 @@ const CreateRecipe = ({ user }) => {
               <Form.Control
                 as="textarea"
                 name="method"
+                onBlur={methodErrorHandler}
                 rows={3}
                 placeholder="Heat oven to 180C/fan 160C/gas 4. Lay the pork, skin-side up, on a rack in a roasting tin. Trickle with a little oil,....... "
               />
+              <Alert variant="danger" show={errors.method}>
+                {errors.method}
+              </Alert>
             </Form.Group>
 
             <FormGroup className="mb-3" controlId="exampleForm.ControlInput1">
@@ -102,12 +146,24 @@ const CreateRecipe = ({ user }) => {
                 type="text"
                 placeholder="3 hrs and 30 mins"
                 name="cookTime"
+                onBlur={cookTimeErrorHandler}
               />
+              <Alert variant="danger" show={errors.cookTime}>
+                {errors.cookTime}
+              </Alert>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Serves</Form.Label>
-              <Form.Control type="text" placeholder="6" name="serves" />
+              <Form.Control
+                type="text"
+                placeholder="6"
+                name="serves"
+                onBlur={servesErrorHandler}
+              />
+              <Alert variant="danger" show={errors.serves}>
+                {errors.serves}
+              </Alert>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -116,7 +172,11 @@ const CreateRecipe = ({ user }) => {
                 type="url"
                 placeholder="https://www.recepis.de"
                 name="pictureUrl"
+                onBlur={imageErrorHandler}
               />
+              <Alert variant="danger" show={errors.pictureUrl}>
+                {errors.pictureUrl}
+              </Alert>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -125,7 +185,11 @@ const CreateRecipe = ({ user }) => {
                 type="url"
                 placeholder="https://www.recepis.de"
                 name="videoUrl"
+                onBlur={videoErrorHandler}
               />
+              <Alert variant="danger" show={errors.videoUrl}>
+                {errors.videoUrl}
+              </Alert>
             </Form.Group>
 
             <Button variant="primary" type="submit">

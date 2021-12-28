@@ -27,13 +27,13 @@ export const Remove = (recipeId, token) => {
 export const GetRecipes = () =>
   request.get(`${baseUrl}/recipes`).then((res) => Object.values(res));
 
-export const GetMyRecipes = () =>
-  request
-    .get(`${baseUrl}/recipes?where=${encodeURIComponent()}`)
+export const GetMyRecipes = (ownerId) =>{
+  let query = encodeURIComponent(`_ownerId="${ownerId}"`);
+
+  return request
+    .get(`${baseUrl}/recipes?where=${query}`)
     .then((res) => Object.values(res));
-// export const GetRecipe = async (recipeId) => {
-//   return request.get(`${baseUrl}/recipes/${recipeId}`);
-// };
+}
 
 export const Update = (recipeId, recipeData) =>
   request.put(`${baseUrl}/recipes/${recipeId}`, recipeData);

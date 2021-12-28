@@ -2,10 +2,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Form, Button, FormGroup, Alert } from "react-bootstrap";
 
 import * as recipeService from "../../services/recipeService";
-import { useState } from "react";
-import useRecipeState from "../../hooks/useRecipeState";
-import isAuth from "../../hoc/isAuth";
 import useGetCategories from "../../hooks/useGetCategories";
+import useRecipeState from "../../hooks/useRecipeState";
+import useValidate from "../../hooks/useValidate";
+import isAuth from "../../hoc/isAuth";
 
 const EditRecipe = () => {
   const navigate = useNavigate();
@@ -14,24 +14,41 @@ const EditRecipe = () => {
   const { recipeId } = useParams();
   const [recipe, setRecipe] = useRecipeState(recipeId);
 
-  const [errors, setErrors] = useState({
-    title: "",
-    ingredient: "",
-    pictureUrl: "",
-    method: "",
-  });
+  const [errors, setErrors] = useValidate();
+
+  // ingredient: "",
+  // method: "",
+  // cookTime: "",
+  // serves: 0,
 
   const titleErrorHandler = (e) => {
-    let currTitle = e.target.value;
-
-    if (currTitle.length < 3) {
-      setErrors((state) => ({
-        ...state,
-        title: "Your name sould be at least 3 characters!",
-      }));
-    } else {
-      setErrors((state) => ({ ...state, title: false }));
-    }
+    let value = e.target.value;
+    setErrors(value, "title");
+  };
+  const ingredientErrorHandler = (e) => {
+    let value = e.target.value;
+    setErrors(value, "ingredient");
+  };
+  const methodErrorHandler = (e) => {
+    let value = e.target.value;
+    setErrors(value, "method");
+  };
+  const cookTimeErrorHandler = (e) => {
+    let value = e.target.value;
+    console.log(value);
+    setErrors(value, "cookTime");
+  };
+  const servesErrorHandler = (e) => {
+    let value = e.target.value;
+    setErrors(value, "serves");
+  };
+  const imageErrorHandler = (e) => {
+    let value = e.target.value;
+    setErrors(value, "pictureUrl");
+  };
+  const videoErrorHandler = (e) => {
+    let value = e.target.value;
+    setErrors(value, "videoUrl");
   };
 
   const onRecipeEdit = (e) => {
@@ -69,6 +86,7 @@ const EditRecipe = () => {
               <Form.Control
                 as="textarea"
                 name="ingredients"
+                onBlur={ingredientErrorHandler}
                 defaultValue={recipe.ingredients}
                 rows={3}
                 placeholder="1.3kg piece pork belly, boned, rind left on and scored (ask your butcher to do this, 2 tsp sunflower oil)"
@@ -85,6 +103,7 @@ const EditRecipe = () => {
               <Form.Control
                 as="textarea"
                 name="method"
+                onBlur={methodErrorHandler}
                 defaultValue={recipe.method}
                 rows={3}
                 placeholder="Heat oven to 180C/fan 160C/gas 4. Lay the pork, skin-side up, on a rack in a roasting tin. Trickle with a little oil,....... "
@@ -109,24 +128,33 @@ const EditRecipe = () => {
                 type="text"
                 placeholder="3 hrs and 30 mins"
                 name="cookTime"
+                onBlur={cookTimeErrorHandler}
                 defaultValue={recipe.cookTime}
               />
+              <Alert variant="danger" show={errors.cookTime}>
+                {errors.cookTime}
+              </Alert>
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Serves</Form.Label>
               <Form.Control
-                type="text"
+                type="number"
                 placeholder="6"
                 name="serves"
+                onBlur={servesErrorHandler}
                 defaultValue={recipe.serves}
               />
+              <Alert variant="danger" show={errors.serves}>
+                {errors.serves}
+              </Alert>
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Picture Url</Form.Label>
+              <Form.Label>Image Url</Form.Label>
               <Form.Control
                 type="url"
                 placeholder="https://www.recepis.de"
                 name="pictureUrl"
+                onBlur={imageErrorHandler}
                 defaultValue={recipe.pictureUrl}
               />
               <Alert variant="danger" show={errors.pictureUrl}>
@@ -139,8 +167,12 @@ const EditRecipe = () => {
                 type="url"
                 placeholder="https://www.recepis.de"
                 name="videoUrl"
+                onBlur={videoErrorHandler}
                 defaultValue={recipe.videoUrl}
               />
+              <Alert variant="danger" show={errors.videoUrl}>
+                {errors.videoUrl}
+              </Alert>
             </Form.Group>
             <Button variant="primary" type="submit">
               Edit

@@ -15,22 +15,23 @@ const SearchBox = ({ recipes }) => {
     const imput = new FormData(e.currentTarget);
     let recipeName = imput.get("searchImput");
 
-    const searcedRecipes = recipes.filter((recipe) =>
-      recipe.title.includes(recipeName)
-    );
-    setRecipe(searcedRecipes);
+    if (recipeName) {
+      const searcedRecipes = recipes.filter((recipe) =>
+        recipe.title.includes(recipeName)
+      );
+      setRecipe(searcedRecipes);
 
-    console.log(searcedRecipes.length);
-    if (searcedRecipes.length === 0) {
-      setErrors((state) => ({
-        ...state,
-        search: "Recipe Not Found!",
-      }));
-    } else {
-      setErrors((state) => ({
-        ...state,
-        search: "",
-      }));
+      if (searcedRecipes.length === 0) {
+        setErrors((state) => ({
+          ...state,
+          search: "Recipe Not Found!",
+        }));
+      } else {
+        setErrors((state) => ({
+          ...state,
+          search: "",
+        }));
+      }
     }
   };
 

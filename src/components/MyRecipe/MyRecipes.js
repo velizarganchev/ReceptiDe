@@ -5,13 +5,13 @@ import isOwner from "../../hoc/isAuth";
 
 const MyRecipes = ({user}) => {
 
-  const [recipe, setRecipe] = useState([]);
+  const [recipe, setRecipe] = useState([]); 
+
   useEffect(() => {
     recipeService
-      .GetRecipes()
+      .GetMyRecipes(user._id)
       .then((res) => {
-        let mainDishes = res.filter((x) => x._ownerId === user._id);
-        setRecipe(mainDishes);
+        setRecipe(res);
       })
       .catch((err) => {
         console.log(err);
