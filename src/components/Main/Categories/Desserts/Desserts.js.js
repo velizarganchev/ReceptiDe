@@ -3,7 +3,7 @@ import useGetRecipes from "../../../../hooks/useGetRecipes";
 
 const Desserts = () => {
   const filter = "Desserts";
-  const [recipe, setRecipe] = useGetRecipes(filter);
+  const [recipe] = useGetRecipes(filter);
 
   if (recipe.length > 0) {
     return (

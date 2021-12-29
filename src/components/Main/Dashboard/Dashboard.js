@@ -5,14 +5,13 @@ import NewRecipes from "../Recipes/NewRecipes";
 import * as recipeService from "../../../services/recipeService";
 
 const Dashboard = () => {
-
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
     recipeService
       .GetRecipes()
       .then((res) => {
-        setRecipes(res); 
+        setRecipes(res);
       })
       .catch((err) => {
         console.log(err.message);
@@ -21,9 +20,9 @@ const Dashboard = () => {
 
   return (
     <>
-      <SearchBox recipes={recipes}/>
+      <SearchBox recipes={recipes} />
       <Categories />
-      <NewRecipes recipes={recipes}/>
+      <NewRecipes recipes={recipes} />
     </>
   );
 };

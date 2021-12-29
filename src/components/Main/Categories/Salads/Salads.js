@@ -3,7 +3,7 @@ import RecipeCard from "../../Recipes/RecipeCard";
 
 const Salads = () => {
   const filter = "Salads";
-  const [recipe, setRecipe] = useGetRecipes(filter);
+  const [recipe] = useGetRecipes(filter);
 
   if (recipe.length > 0) {
     return (

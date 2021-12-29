@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthContext";
 import * as authService from "../../services/authService";
 
-
 const Header = () => {
   const navigate = useNavigate();
   const { user, logout } = useAuthContext();

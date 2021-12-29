@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 const RecipeCard = ({ recipe }) => {
   return (
@@ -8,7 +7,7 @@ const RecipeCard = ({ recipe }) => {
       </Link>
       <h4>
         <Link to={`/recipeDetails/${recipe._id}`} className="recipeTitle">
-        {recipe.title}
+          {recipe.title}
         </Link>
       </h4>
     </article>

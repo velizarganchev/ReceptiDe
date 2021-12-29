@@ -9,17 +9,12 @@ import isAuth from "../../hoc/isAuth";
 
 const EditRecipe = () => {
   const navigate = useNavigate();
-  const [categories, setCategories] = useGetCategories();
+  const [categories] = useGetCategories();
 
   const { recipeId } = useParams();
-  const [recipe, setRecipe] = useRecipeState(recipeId);
+  const [recipe] = useRecipeState(recipeId);
 
   const [errors, setErrors] = useValidate();
-
-  // ingredient: "",
-  // method: "",
-  // cookTime: "",
-  // serves: 0,
 
   const titleErrorHandler = (e) => {
     let value = e.target.value;

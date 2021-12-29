@@ -1,7 +1,6 @@
 import RecipeCard from "./RecipeCard";
 
-const NewRecipes = ({recipes}) => {
-
+const NewRecipes = ({ recipes }) => {
   if (recipes.length > 0) {
     return (
       <section className="container">

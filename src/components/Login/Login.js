@@ -29,7 +29,7 @@ const Login = () => {
       .catch((err) => {
         setErrors((state) => ({
           ...state,
-          pass: "Login or password don't match",
+          pass: "Email or Password don't match",
         }));
 
         setTimeout(() => {

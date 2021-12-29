@@ -19,94 +19,65 @@ const useValidate = () => {
   const setErrors = (value, handler) => {
     switch (handler) {
       case "title":
-        if (value.length < 3) {
-          setState((state) => ({
-            ...state,
-            title: commonErr,
-          }));
-        } else {
-          setState((state) => ({ ...state, title: false }));
-        }
+        value.length < 3
+          ? setState((state) => ({
+              ...state,
+              title: commonErr,
+            }))
+          : setState((state) => ({ ...state, title: false }));
         break;
       case "ingredient":
-        if (value.length < 30) {
-          setState((state) => ({
-            ...state,
-            ingredient: ingredientAndMethodErr,
-          }));
-        } else {
-          setState((state) => ({ ...state, ingredient: false }));
-        }
+        value.length < 30
+          ? setState((state) => ({
+              ...state,
+              ingredient: ingredientAndMethodErr,
+            }))
+          : setState((state) => ({ ...state, ingredient: false }));
         break;
       case "method":
-        if (value.length < 30) {
-          setState((state) => ({
-            ...state,
-            method: ingredientAndMethodErr,
-          }));
-        } else {
-          setState((state) => ({ ...state, method: false }));
-        }
+        value.length < 30
+          ? setState((state) => ({
+              ...state,
+              method: ingredientAndMethodErr,
+            }))
+          : setState((state) => ({ ...state, method: false }));
         break;
       case "cookTime":
-        if (value.length < 3) {
-          setState((state) => ({
-            ...state,
-            cookTime: commonErr,
-          }));
-        } else {
-          setState((state) => ({ ...state, cookTime: false }));
-        }
+        value.length < 3
+          ? setState((state) => ({
+              ...state,
+              cookTime: commonErr,
+            }))
+          : setState((state) => ({ ...state, cookTime: false }));
         break;
       case "serves":
-        if (!value > 0) {
-          setState((state) => ({
-            ...state,
-            serves: servesErr,
-          }));
-        } else {
-          setState((state) => ({ ...state, serves: false }));
-        }
+        !value > 0
+          ? setState((state) => ({
+              ...state,
+              serves: servesErr,
+            }))
+          : setState((state) => ({ ...state, serves: false }));
         break;
       case "pictureUrl":
-        if (!isValidUrl(value)) {
-          setState((state) => ({
-            ...state,
-            pictureUrl: urlErr,
-          }));
-        } else {
-          setState((state) => ({ ...state, pictureUrl: false }));
-        }
+        !isValidUrl(value)
+          ? setState((state) => ({
+              ...state,
+              pictureUrl: urlErr,
+            }))
+          : setState((state) => ({ ...state, pictureUrl: false }));
         break;
       case "videoUrl":
-        if (!isValidUrl(value)) {
-          setState((state) => ({
-            ...state,
-            videoUrl: urlErr,
-          }));
-        } else {
-          setState((state) => ({ ...state, videoUrl: false }));
-        }
+        !isValidUrl(value)
+          ? setState((state) => ({
+              ...state,
+              videoUrl: urlErr,
+            }))
+          : setState((state) => ({ ...state, videoUrl: false }));
         break;
-
       default:
         break;
     }
-
-    // try {
-    //   if (value.length < 3) {
-    //     setState((state) => ({
-    //       ...state,
-    //       handler,
-    //     }));
-    //   } else {
-    //     setState((state) => ({ ...state, title: false }));
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    // }
   };
-
   return [state, setErrors];
 };
 export const isValidUrl = (url) => {

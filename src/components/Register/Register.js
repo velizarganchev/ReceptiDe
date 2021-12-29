@@ -6,7 +6,7 @@ import { useAuthContext } from "../../contexts/AuthContext";
 import * as authService from "../../services/authService";
 
 const Register = () => {
-  const initialState = { pass: "" };
+  const initialState = { passMatch: "", passLengt: "" };
   const navigate = useNavigate();
 
   const [errors, setErrors] = useState(initialState);
@@ -22,13 +22,13 @@ const Register = () => {
     if (password !== confirmPassword) {
       setErrors((state) => ({
         ...state,
-        pass: "Passwords did not match!",
+        passMatch: "Passwords did not match!",
       }));
 
       setTimeout(() => {
         setErrors(initialState);
       }, 3000);
-    } else {
+    }else {
       authService
         .Register(email, password)
         .then((authData) => {
@@ -40,7 +40,6 @@ const Register = () => {
         });
     }
   };
-
   return (
     <>
       <h1>Register</h1>
@@ -71,9 +70,9 @@ const Register = () => {
               required
               name="password"
             />
-            <Form.Control.Feedback type="invalid">
-              Please provide a valid password.
-            </Form.Control.Feedback>
+            <Alert variant="danger" show={errors.passLengt}>
+              {errors.passLengt}
+            </Alert>
           </Form.Group>
         </Row>
         <Row>
@@ -85,8 +84,8 @@ const Register = () => {
               required
               name="confirmPassword"
             />
-            <Alert variant="danger" show={errors.pass}>
-              {errors.pass}
+            <Alert variant="danger" show={errors.passMatch}>
+              {errors.passMatch}
             </Alert>
           </Form.Group>
         </Row>
