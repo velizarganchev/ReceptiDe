@@ -19,6 +19,7 @@ import MyRecipes from "./components/MyRecipe/MyRecipes";
 import Details from "./components/Main/Recipes/Details";
 import ErrorBoundary from "./components/Common/ErrorBoundary";
 
+
 function App() {
   return (
     <ErrorBoundary>
