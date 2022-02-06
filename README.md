@@ -1,4 +1,4 @@
-# Receptide
+# Recepti.de
 
 
 ## Overview
