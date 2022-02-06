@@ -1,20 +1,33 @@
-import { Navigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams, Navigate } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
-import { useParams } from "react-router-dom";
-import useRecipeState from "../hooks/useRecipeState";
+import * as recipeService from "../services/recipeService"
 
 export const isOwner = (Component) => {
   const Wrapper = (props) => {
-    const { user } = useAuthContext(); 
-    const { recipeId } = useParams();
+    const [user] = useAuthContext();
+    const [recipeId] = useParams();
+    const [recipe, setRecipe] = useState();
 
-    // console.log(user._id)
-    // console.log(recipeId)
+
+    useEffect(() => {
+      recipeService
+        .GetEditRecipe(recipeId)
+        .then((recipe) => {
+          setRecipe(recipe);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    }, [recipeId]);
+
+    console.log(user._id)
+    console.log(recipe);
 
     return user._id  ? (
       <Component {...props} />
     ) : (
-      <Navigate to="/" />
+      <Navigate to="/my-recipes" />
     );
   };
   return Wrapper;

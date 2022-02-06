@@ -27,13 +27,15 @@ export const Remove = (recipeId, token) => {
 export const GetRecipes = () =>
   request.get(`${baseUrl}/recipes`).then((res) => Object.values(res));
 
-export const GetMyRecipes = (ownerId) =>{
+export const GetMyRecipes = (ownerId) => {
   let query = encodeURIComponent(`_ownerId="${ownerId}"`);
 
   return request
     .get(`${baseUrl}/recipes?where=${query}`)
     .then((res) => Object.values(res));
-}
+};
+export const GetEditRecipe = (recipeId) =>
+  request.get(`${baseUrl}/recipes${recipeId}`).then((res) => Object.values(res));
 
 export const Update = (recipeId, recipeData) =>
   request.put(`${baseUrl}/recipes/${recipeId}`, recipeData);

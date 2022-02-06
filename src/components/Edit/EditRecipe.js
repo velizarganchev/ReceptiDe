@@ -5,7 +5,7 @@ import * as recipeService from "../../services/recipeService";
 import useGetCategories from "../../hooks/useGetCategories";
 import useRecipeState from "../../hooks/useRecipeState";
 import useValidate from "../../hooks/useValidate";
-import isAuth from "../../hoc/isAuth";
+import isOwner from "../../hoc/isOwner";
 
 const EditRecipe = () => {
   const navigate = useNavigate();
@@ -178,4 +178,4 @@ const EditRecipe = () => {
     </>
   );
 };
-export default isAuth(EditRecipe);
+export default EditRecipe;

@@ -9,7 +9,7 @@ import ConfirmDialog from "../../Common/ConfirmDialog";
 
 const Details = () => {
   const navigate = useNavigate();
-  const { recipeId } = useParams();
+  const { recipeId } = useParams(); 
   const [recipe] = useRecipeState(recipeId);
   const { user } = useAuthContext();
   const [deleteDialog, setDeleteDialog] = useState(false);

@@ -26,8 +26,8 @@ function App() {
         <div className="App">
           <Header />
           <main className="site-content">
-            <Routes>
-              <Route path="/*" element={<Dashboard />} />
+            <Routes>      
+              <Route path="/*" element={<Dashboard/>}/>      
               <Route path="/main-dishes" element={<MainDishes />} />
               <Route path="/soups" element={<Soups />} />
               <Route path="/salads" element={<Salads />} />
