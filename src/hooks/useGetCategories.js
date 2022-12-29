@@ -6,6 +6,7 @@ const useGetCategories = () => {
     recipeService
       .GetCategories()
       .then((res) => {
+        console.log(res)
         setState(Object.values(res));
       })
       .catch((err) => {

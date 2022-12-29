@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 const Categories = () => {
+  
   return (
     <section className="container">
       <h2 className="sectionTitle">Categories</h2>

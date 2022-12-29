@@ -1,9 +1,9 @@
 import * as request from "./requester";
 
-const baseUrl = "http://softuni-custom-server.herokuapp.com/data";
+const baseUrl = "https://localhost:7243/api/Recipe";
 
 export const Create = async (recipeData, token) => {
-  const response = await fetch(`${baseUrl}/recipes`, {
+  const response = await fetch(`${baseUrl}/addRecipe`, {
     method: "POST",
     headers: {
       "content-type": "aplication/json",
@@ -17,7 +17,7 @@ export const Create = async (recipeData, token) => {
 };
 
 export const Remove = (recipeId, token) => {
-  return fetch(`${baseUrl}/recipes/${recipeId}`, {
+  return fetch(`${baseUrl}/deleteRecipe/${recipeId}`, {
     method: "DELETE",
     headers: {
       "X-Authorization": token,
@@ -25,7 +25,7 @@ export const Remove = (recipeId, token) => {
   }).then((res) => res.json());
 };
 export const GetRecipes = () =>
-  request.get(`${baseUrl}/recipes`).then((res) => Object.values(res));
+  request.get(`${baseUrl}/getAll`).then((res) => Object.values(res));
 
 export const GetMyRecipes = (ownerId) => {
   let query = encodeURIComponent(`_ownerId="${ownerId}"`);
@@ -38,10 +38,10 @@ export const GetEditRecipe = (recipeId) =>
   request.get(`${baseUrl}/recipes${recipeId}`).then((res) => Object.values(res));
 
 export const Update = (recipeId, recipeData) =>
-  request.put(`${baseUrl}/recipes/${recipeId}`, recipeData);
+  request.put(`${baseUrl}/updateRecipe/${recipeId}`, recipeData);
 
 export const GetOne = (recipeId, signal) => {
-  return fetch(`${baseUrl}/recipes/${recipeId}`, { signal }).then((res) =>
+  return fetch(`${baseUrl}/${recipeId}`, { signal }).then((res) =>
     res.json()
   );
 };
@@ -49,7 +49,7 @@ export const GetOne = (recipeId, signal) => {
 export const GetCategories = () => {
   return request
     .get(
-      "http://softuni-custom-server.herokuapp.com/jsonstore/recipeCategories"
+      "https://localhost:7243/api/Category"
     )
     .then((res) => Object.values(res));
 };

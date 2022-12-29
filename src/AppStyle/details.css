@@ -16,6 +16,9 @@
     flex-wrap: wrap;
     margin-right: -115px;
   }
+  img{
+    width: 350px auto !important;
+  }
   .openRecipeRightDetails{
     margin-left: 94px;
     display: flex;

@@ -14,7 +14,7 @@ const useRecipeState = (recipeId) => {
     recipeService
       .GetOne(recipeId, controller.signal)
       .then((recipeRes) => {
-        setRecipe(recipeRes);
+        setRecipe(recipeRes.data);
       })
       .catch((err) => {
         console.log(err.message);
