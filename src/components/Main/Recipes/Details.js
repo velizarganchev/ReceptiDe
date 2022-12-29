@@ -69,7 +69,7 @@ const Details = () => {
   //     Like
   //   </button>
   // );
-  console.log(recipe.ingredients)
+
   return (
     <>
       {/* <ConfirmDialog[0]
@@ -111,11 +111,9 @@ const Details = () => {
           <div className="LeftSide">
             <section className="ingredients">
               <h3 className="ingredientsTitle">Ingredients</h3>
-              {/* {recipe.ingredients.map(item => 
-              <>
-              <p>{item.name}</p> 
-              <p>{item.quantity}</p>
-              </>)} */}
+              {
+                recipe.ingredients?.map((item => <p key={item.name}>{item.name} - {item.quantity}</p>))
+              }          
             </section>
           </div>
           <div className="RightSide">
