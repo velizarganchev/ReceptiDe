@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -8,75 +8,63 @@ import { useAuthContext } from "../../../contexts/AuthContext";
 import ConfirmDialog from "../../Common/ConfirmDialog";
 
 const Details = () => {
-  const [recipe, setRecipe] = useState({});
-  
-  const navigate = useNavigate();
-  const { recipeId } = useParams(); 
-  // const {recipe} = useRecipeState(recipeId);
 
-  useEffect(() => {
+  const navigate = useNavigate();
+  const { recipeId } = useParams();
+  const [recipe] = useRecipeState(recipeId);
+  const { user } = useAuthContext();
+  const [deleteDialog, setDeleteDialog] = useState(false);
+
+  console.log(user)
+  const onDeleteHandler = () => {
     recipeService
-      .GetOne(recipeId)
-      .then((recipeRes) => {
-        setRecipe(recipeRes.data);
+      .Remove(recipeId, user.accessToken)
+      .then(() => {
+        navigate("/Home");
+      })
+      .finally(() => {
+        setDeleteDialog(false);
       })
       .catch((err) => {
         console.log(err.message);
       });
-  }, [recipeId]);
+  };
 
-  // const { user } = useAuthContext();
-  // const [deleteDialog, setDeleteDialog] = useState(false);
+  const onDeleteClickHandler = () => {
+    setDeleteDialog(true);
+  };
 
-  // const onDeleteHandler = () => {
-  //   recipeService
-  //     .Remove(recipeId, user.accessToken)
-  //     .then(() => {
-  //       navigate("/Home");
-  //     })
-  //     .finally(() => {
-  //       setDeleteDialog(false);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.message);
-  //     });
-  // };
-
-  // const onDeleteClickHandler = () => {
-  //   setDeleteDialog(true);
-  // };
-
-  // const ownerButton = (
-  //   <>
-  //     <Link
-  //       to={`/edit/${recipeId}`}
-  //       type="button"
-  //       className="btn btn-warning btnDetails"
-  //     >
-  //       Edit
-  //     </Link>
-  //     <button
-  //       type="button"
-  //       className="btn btn-danger btnDetails"
-  //       onClick={onDeleteClickHandler}
-  //     >
-  //       Delete
-  //     </button>
-  //   </>
-  // );
-  // const guestButton = (
-  //   <button type="button" className="btn btn-info">
-  //     Like
-  //   </button>
-  // );
+  const ownerButton = (
+    <>
+      <Link
+        to={`/edit/${recipeId}`}
+        type="button"
+        className="btn btn-warning btnDetails"
+      >
+        Edit
+      </Link>
+      <button
+        type="button"
+        className="btn btn-danger btnDetails"
+        onClick={onDeleteClickHandler}
+      >
+        Delete
+      </button>
+    </>
+  );
+  const guestButton = (
+    <button type="button" className="btn btn-info">
+      Like
+    </button>
+  );
 
   return (
     <>
-      {/* <ConfirmDialog[0]
+      <ConfirmDialog
         show={deleteDialog}
         close={() => setDeleteDialog(false)}
-         onDelete={onDeleteHandler}
-      /> */}
+        onDelete={onDeleteHandler}
+      />
       <article className="openRecipe">
         <div className="openRecipeBackground">
           <div className="openRecipeBackgroundFront">
@@ -100,20 +88,20 @@ const Details = () => {
             </div>
           </section>
         </div>
-        {/* <div>
-          {user._id &&
-            (recipe._ownerId === user._id ? ownerButton : guestButton)}
-          <div className="likes">
+        <div>
+          {/* {user.userId &&
+            (recipe.user.id === user.userId ? ownerButton : guestButton)} */}
+          {/* <div className="likes">
             <span>Likes: {recipe.likes?.length}</span>
-          </div>
-        </div> */}
+          </div> */}
+        </div>
         <div className="openRecipeBootomDetails">
           <div className="LeftSide">
             <section className="ingredients">
               <h3 className="ingredientsTitle">Ingredients</h3>
               {
                 recipe.ingredients?.map((item => <p key={item.name}>{item.name} - {item.quantity}</p>))
-              }          
+              }
             </section>
           </div>
           <div className="RightSide">

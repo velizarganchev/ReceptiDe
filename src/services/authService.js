@@ -1,7 +1,7 @@
-const baseUrl = "http://softuni-custom-server.herokuapp.com";
+const baseUrl = "https://localhost:7243/api/Auth";
 
 export const Register = (email, password) => {
-  return fetch(`${baseUrl}/users/register`, {
+  return fetch(`${baseUrl}/register`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -11,7 +11,7 @@ export const Register = (email, password) => {
 };
 
 export const Login = async (email, password) => {
-  let res = await fetch(`${baseUrl}/users/login`, {
+  let res = await fetch(`${baseUrl}/login`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -29,7 +29,7 @@ export const Login = async (email, password) => {
 };
 
 export const logout = (token) => {
-  return fetch(`${baseUrl}/users/logout`, {
+  return fetch(`${baseUrl}/logout`, {
     headers: {
       "X-Authorization": token,
     },
@@ -38,10 +38,9 @@ export const logout = (token) => {
 
 export const getUser = () => {
   let username = localStorage.getItem("username");
-
   return username;
 };
 
-// export const isAuthenticated = () => {
-//   return Boolean(getUser());
-// };
+export const isAuthenticated = () => {
+  return Boolean(getUser());
+};

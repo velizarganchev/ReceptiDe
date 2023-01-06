@@ -10,7 +10,7 @@ const MainDishes = () => {
       <section className="container">
         <h2 className="sectionTitle">Main Dishes</h2>
         {recipe.map((x) => (
-          <RecipeCard key={x._id} recipe={x} />
+          <RecipeCard key={x.id} recipe={x} />
         ))}
       </section>
     );

@@ -33,7 +33,7 @@ const Register = () => {
         .Register(email, password)
         .then((authData) => {
           login(authData);
-          navigate("/Home");
+          navigate("/login");
         })
         .catch((err) => {
           console.log(err.message);

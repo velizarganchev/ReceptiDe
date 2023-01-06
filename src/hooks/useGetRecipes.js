@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 import * as recipeService from "../services/recipeService"
 
 const useGetRecipes = (filter) => {
-  const [state, setState] = useState([]); 
-  
+  const [state, setState] = useState([]);
+
   useEffect(() => {
     recipeService
       .GetRecipes()
       .then((res) => {
-        let data = res.filter((x) => x.category === filter);
+        let data = res[0].filter((x) => x.category.name === filter);
         setState(data);
       })
       .catch((err) => {
