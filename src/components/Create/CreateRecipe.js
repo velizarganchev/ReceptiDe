@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Form, Button, FormGroup, Alert } from "react-bootstrap";
+import { Form, Button, FormGroup, Alert, Row, Col } from "react-bootstrap";
 
 import * as recipeService from "../../services/recipeService";
 import useGetCategories from "../../hooks/useGetCategories";
@@ -98,20 +98,51 @@ const CreateRecipe = ({ user }) => {
                 {errors.title}
               </Alert>
             </Form.Group>
+            <Row className="align-items-center">
+              <Form.Group as={Col} controlId="exampleForm.ControlInput1">
+                <Form.Label>Ingredients Name</Form.Label>
+                <Form.Control
+                  className="mb-3"
+                  type="text"
+                  name="ingredients"
+                  onBlur={ingredientErrorHandler}
+                  placeholder=""
+                />
+                <Alert variant="danger" show={errors.ingredient}>
+                  {errors.ingredient}
+                </Alert>
+              </Form.Group>
+              <Form.Group as={Col} controlId="exampleForm.ControlInput1">
+                <Form.Label>Ingredients Quantity</Form.Label>
+                <Form.Control
+                  className="mb-3"
+                  type="text"
+                  name="ingredients"
+                  onBlur={ingredientErrorHandler}
+                  placeholder=""
+                />
+                <Alert variant="danger" show={errors.ingredient}>
+                  {errors.ingredient}
+                </Alert>
+              </Form.Group>
+              <FormGroup as={Col}>
+                <Button variant="outline-secondary">
+                  Add
+                </Button>
+              </FormGroup>
+              <FormGroup>
+                <Form.Control
+                  className="mb-3"
+                  as="textarea"
+                  name="ingredients"
+                  onBlur={ingredientErrorHandler}
+                  rows={3}
+                  placeholder=""
+                />
+              </FormGroup>
+            </Row>
 
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Ingredients</Form.Label>
-              <Form.Control
-                as="textarea"
-                name="ingredients"
-                onBlur={ingredientErrorHandler}
-                rows={3}
-                placeholder="1.3kg piece pork belly, boned, rind left on and scored (ask your butcher to do this, 2 tsp sunflower oil)"
-              />
-              <Alert variant="danger" show={errors.ingredient}>
-                {errors.ingredient}
-              </Alert>
-            </Form.Group>
+
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"

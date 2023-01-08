@@ -15,7 +15,8 @@ const Details = () => {
   const { user } = useAuthContext();
   const [deleteDialog, setDeleteDialog] = useState(false);
 
-  console.log(user)
+  console.log(user.userId)
+  console.log(recipe.id)
   const onDeleteHandler = () => {
     recipeService
       .Remove(recipeId, user.accessToken)
@@ -70,7 +71,7 @@ const Details = () => {
           <div className="openRecipeBackgroundFront">
             <h1 className="openRecipeTitle">{recipe.title}</h1>
             <div className="mainImage">
-              <img src={recipe.pictureUrl} alt="" />
+              <img className="details-img" src={recipe.pictureUrl} alt="" />
             </div>
           </div>
           <section className="openRecipeRightDetails">
@@ -89,8 +90,8 @@ const Details = () => {
           </section>
         </div>
         <div>
-          {/* {user.userId &&
-            (recipe.user.id === user.userId ? ownerButton : guestButton)} */}
+          {user.userId &&
+            (recipe.id === user.userId ? ownerButton : guestButton)}
           {/* <div className="likes">
             <span>Likes: {recipe.likes?.length}</span>
           </div> */}
